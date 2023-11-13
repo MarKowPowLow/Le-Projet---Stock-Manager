@@ -6,12 +6,12 @@ from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
    
       
         const firebaseConfig = {
-          apiKey: "AIzaSyA-yDBRtQz41FEHxA80mEFz-Nd_ZuhJLpk",
-          authDomain: "viaformation-b4604.firebaseapp.com",
-          projectId: "viaformation-b4604",
-          storageBucket: "viaformation-b4604.appspot.com",
-          messagingSenderId: "487880074228",
-          appId: "1:487880074228:web:e68f96d71048f94a144fa1"
+          apiKey: "AIzaSyAu5NBLjBU1Crc7J9kJ7PDQPEFcKPuFnXQ",
+          authDomain: "project-stockmanager.firebaseapp.com",
+          projectId: "project-stockmanager",
+          storageBucket: "project-stockmanager.appspot.com",
+          messagingSenderId: "978744890607",
+          appId: "1:978744890607:web:58314e25457be3fbf4b71a"
         };
       
         // Initialize Firebase

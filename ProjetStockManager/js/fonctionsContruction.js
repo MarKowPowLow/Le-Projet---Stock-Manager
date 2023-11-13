@@ -15,4 +15,3 @@ const constructeurContainerPrincipal = (text)=>{
 
 export {constructeurContainerPrincipal}
 
-//fgfgfgfg

@@ -1,3 +1,4 @@
+import{objetConstructeur} from "./fonctionsContruction.js"
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -45,16 +46,22 @@ document.body.appendChild(divInput);
 let tableauObjectDeChamp = [
     {nom :"Nom", type:"text"},
     {nom: "Référence", type: "text"},
-    {nom:"Quantité",type: "number"},
-    {nom: "Catégorie", type: "select"}
+    {nom:"Quantité",type: "number", step:"1"},
+    {nom: "Catégorie", type: "text", check: false},
+    {nom: "prix",type: "number", step:"0.01", check:false},
+    {nom:"date", type:"date", check:false},
+    {nom:"sous catégorie", type:"text", check:false},
+    {nom:"Unité", type:"text", check:false}
 ]
 
 for(let champ of tableauObjectDeChamp) {
+    if(champ.check!==false)
 
-    let inputProduit = document.createElement("input");
+{    let inputProduit = document.createElement("input");
     inputProduit.setAttribute("type", champ.type);
     inputProduit.setAttribute("placeholder", champ.nom);
-    divInput.appendChild(inputProduit);
+    inputProduit.setAttribute("id", champ.nom)
+    divInput.appendChild(inputProduit);}
 }
 
 let validButton = document.createElement("img");
@@ -66,16 +73,19 @@ divInput.appendChild(validButton);
 
 let conteneurList = document.createElement("div");
 conteneurList.classList.add("conteneurliste")
+conteneurList.id = "conteneurliste"
 document.body.appendChild(conteneurList);
 
 
 
 // Création écouteur événement bouton valider
 validButton.addEventListener("click", () => {
-    listeobjet = document.createElement("div");
+    objetConstructeur()
+
+   /* listeobjet = document.createElement("div");
     listeobjet.classList.add("listeobjet");
     conteneurList.appendChild(listeobjet);
-    
+    objetConstructeur()
     // Création des divs contenant la valeur des inputs
    
     objetProduit = document.createElement("div");
@@ -97,8 +107,8 @@ validButton.addEventListener("click", () => {
     deleteButtonConteneurListe = document.createElement("img");
     deleteButtonConteneurListe.src ="./img/circle-xmark-regular.svg";
     deleteButtonConteneurListe.className = "imagesupprimer";
-    listeobjet.appendChild(deleteButtonConteneurListe);
+    listeobjet.appendChild(deleteButtonConteneurListe)*/;
 })
 
-
+export{tableauObjectDeChamp}
 

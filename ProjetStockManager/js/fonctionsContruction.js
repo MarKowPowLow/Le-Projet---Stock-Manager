@@ -1,17 +1,10 @@
-
 //constructeur container principal
 
-const constructeurContainerPrincipal = (text)=>{
+const constructeurContainerPrincipal = (text) => {
+  const containerPrincipal = document.createElement("div");
+  containerPrincipal.textContent = text;
 
-    const containerPrincipal  = document.createElement("div");
-    containerPrincipal.textContent = text;
+  return containerPrincipal;
+};
 
-  
-
-    return containerPrincipal;
-
-
-}
-
-export {constructeurContainerPrincipal}
-
+export { constructeurContainerPrincipal };

@@ -1,8 +1,11 @@
 /* Importations */
 
 import { creationEtAjoutUser, // Fonction de création d'utilisateur avec ajout en BDD FireStore.
+         authentificationEtRecupération, // Fontcion de récupération d'un compte
 
 } from "./fonctionsDeGestion.js";
 
-let user = creationEtAjoutUser("users","bob@mail.com","Passw0rd!",1)
+let xx = await authentificationEtRecupération("users","admin@mail.com","Passw0rd!")
+
+console.log("user : ",xx)
 

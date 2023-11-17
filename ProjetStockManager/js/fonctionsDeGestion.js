@@ -1,24 +1,7 @@
 import { signIn, createUser, obtenirTouteLaCollection, ajouterUnObjet } from "./fonctionsCRUDFirebase.js"
 
 
-const authentificationEtAjoutRole = async (database, email, password) => {
-
-    const user = await signIn(email, password);
-    console.log(user)
-
-    const users = await obtenirTouteLaCollection(database)
-
-    users.forEach(usrs => {
-
-        if (usrs.email === user.user.email) {
-
-            console.log("Match !")
-
-        }
-
-    });
-
-}
+/* Fonction de création de compte utilisateur dans le composant d'authentification et dans la base FireStore */
 
 const creationEtAjoutUser = async (database, email, password, role) => {
 
@@ -85,7 +68,61 @@ const creationEtAjoutUser = async (database, email, password, role) => {
     }
 }
 
+
+/* Fonction de récupération du compte utilisateur connécté, avec comparaison entre celui-ci et son équivalent 
+    en base FireStore pour avoir accés à ses propriétés d'objets */
+
+const authentificationEtRecupération = async (database, email, password) => {
+    let test = null;
+    /* constante qui récupére la connexion utilisateur par le biais de la fonction signIn*/
+    const account = await signIn(email, password)
+    //console.log("account : ", account)
+
+    /* constante qui récupére tout les utilisateurs enregistrés sur FireStore par le biais de la fonction
+        obtenirTouteLaCollection */
+    const users = await obtenirTouteLaCollection(database)
+    //console.log("database : ", users)
+
+    if (account) {
+
+        /* Condition de vérification "SI la base de données FireStore n'est pas vide ET si la connexion renvoie bien 
+            quelquechose..." */
+        if ((users.length > 0)) {
+
+            /* Boucle de parcours du tableau de la collection users renvoyée par la fonction obtenirTouteLaCollection */
+            users.forEach(usrs => {
+
+                if ((usrs.email === account.user.email)) {
+
+                    //console.log("OK !")
+                    test = usrs;
+                    return usrs
+
+                } else {
+
+                    console.log("Erreur ! Utilisateur trouvé dans le Auth, mais absent de la BDD ! Ajoutez l'utilisateur dans la BDD  via la fonction AjouterObjet ou via l'interface graphique !")
+                    console.error(users)
+
+                }
+
+            });
+        } else {
+
+            console.log("Erreur ! BDD vide !")
+            console.error(users)
+
+        }
+
+    } else {
+
+        console.error("Source : authentificationEtRecupération : 'Utilisateur Inconnu'")
+        // Création de div "Utilisateur incconu" ?
+
+    }
+    return test;
+}
+
 export {
     creationEtAjoutUser,
-    authentificationEtAjoutRole,
+    authentificationEtRecupération
 }

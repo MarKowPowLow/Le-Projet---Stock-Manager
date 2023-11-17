@@ -1,4 +1,4 @@
-import{objetConstructeur} from "./fonctionsContruction.js"
+import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -57,7 +57,7 @@ let tableauObjectDeChamp = [
 for(let champ of tableauObjectDeChamp) {
     if(champ.check!==false)
 
-{    let inputProduit = document.createElement("input");
+    {let inputProduit = document.createElement("input");
     inputProduit.setAttribute("type", champ.type);
     inputProduit.setAttribute("placeholder", champ.nom);
     inputProduit.setAttribute("id", champ.nom)
@@ -67,6 +67,7 @@ for(let champ of tableauObjectDeChamp) {
 let validButton = document.createElement("img");
 validButton.src = "./img/Cercle-valider.svg";
 validButton.className = "imagevalider";
+validButton.id = "ajout_BDD";
 divInput.appendChild(validButton);
 
 // Création conteneur liste
@@ -80,7 +81,7 @@ document.body.appendChild(conteneurList);
 
 // Création écouteur événement bouton valider
 validButton.addEventListener("click", () => {
-    objetConstructeur()
+    objetConstructeur() 
 
    /* listeobjet = document.createElement("div");
     listeobjet.classList.add("listeobjet");

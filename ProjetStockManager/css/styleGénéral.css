@@ -8,7 +8,6 @@
 body {
     display: flex;
     flex-direction: column;
-    padding: 20px;
     width: 100vw;
     height: 100vh;
     background-image: linear-gradient(120deg, #FF8A00 0%, #fda085 100%);
@@ -19,10 +18,13 @@ body {
 
 
 .topbar {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    margin-left: 20px;
+    margin-right: 20px;
    
 }
 
@@ -62,6 +64,9 @@ body {
     border-radius: 20px;
     opacity: 50%;
     box-shadow: 1px 8px 2px rgba(0,0,0,0.8), 0 6px 2px rgba(0,0,0,0.23);
+    margin-left: 20px;
+    margin-right: 20px;
+   
 }
 
 
@@ -93,6 +98,9 @@ body {
     border-radius: 20px;
     min-height: 100px;
     overflow-y: scroll;
+    margin-left: 20px;
+    margin-right: 20px;
+   
 }
 
 
@@ -109,3 +117,27 @@ body {
     border-radius: 20px;
     box-shadow: 1px 8px 2px rgba(0,0,0,0.8), 0 6px 2px rgba(0,0,0,0.23);
  }
+.flou {
+ 
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    z-index: 500;
+    justify-content: center;
+  
+    backdrop-filter: blur(2px);
+}
+#popUpModifObjet{
+    display: flex;
+    height: 50%;
+    width: 50%;
+    background-color: #e1e1e1;
+    justify-content: center;
+    align-items: center;
+    z-index: 600;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+    /*maxime va faire un truc simpa !!!*/
+}

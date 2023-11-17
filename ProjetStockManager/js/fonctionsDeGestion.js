@@ -1,4 +1,5 @@
-import { signIn, createUser, obtenirTouteLaCollection, ajouterUnObjet } from "./fonctionsCRUDFirebase.js"
+import { signIn, createUser, obtenirTouteLaCollection, ajouterUnObjet, supprimerUnDocument } from "./fonctionsCRUDFirebase.js"
+import { deleteUser } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 
 /* Fonction de création de compte utilisateur dans le composant d'authentification et dans la base FireStore */
@@ -12,6 +13,7 @@ const creationEtAjoutUser = async (database, email, password, role) => {
     /* Définition d'un objet type a inscrire en base de données */
     let config = {
         email: email,
+        password: password,
         role: role,
     }
 
@@ -29,7 +31,7 @@ const creationEtAjoutUser = async (database, email, password, role) => {
 
                     console.log("Utilisateur déja éxistant en base !")
 
-                    console.log(users)
+                    console.error(users)
 
                 } else {
 
@@ -49,7 +51,7 @@ const creationEtAjoutUser = async (database, email, password, role) => {
 
         } else {
 
-            console.log("Utilisateur non trouvé, création de celui-ci en base.....")
+            console.log("Base vide, création de l'utilisateur en BDD.....")
 
             const userAccount = await createUser(email, password)
 
@@ -76,7 +78,7 @@ const authentificationEtRecupération = async (database, email, password) => {
     let test = null;
     /* constante qui récupére la connexion utilisateur par le biais de la fonction signIn*/
     const account = await signIn(email, password)
-    //console.log("account : ", account)
+    console.log("account : ", account)
 
     /* constante qui récupére tout les utilisateurs enregistrés sur FireStore par le biais de la fonction
         obtenirTouteLaCollection */
@@ -116,13 +118,35 @@ const authentificationEtRecupération = async (database, email, password) => {
     } else {
 
         console.error("Source : authentificationEtRecupération : 'Utilisateur Inconnu'")
-        // Création de div "Utilisateur incconu" ?
+        // Création de div "Utilisateur inconnu" ?
 
     }
     return test;
 }
 
+/* Fonction de suppression d'un utilisateur en base de données */
+
+const SupprimerUtilisateur = async (database, email, id) => {
+
+    const users = obtenirTouteLaCollection(database)
+
+    users.forEach(usrs => {
+
+       if ((usrs.email === email) && (usrs.id === id)) {
+
+            // Fenêtre DIALOG/confirm ?
+        
+       }
+
+
+        
+        
+    });
+
+}
+
 export {
     creationEtAjoutUser,
-    authentificationEtRecupération
+    authentificationEtRecupération,
+    SupprimerUtilisateur
 }

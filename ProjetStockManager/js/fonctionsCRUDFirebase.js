@@ -37,6 +37,23 @@ const createUser = async (email, password) => {
   }
 }
 
+/* Création d'une fonction d'un objet "utilisateur connécté" */
+
+const signIn = async (email, password) => {
+
+  try {
+
+    // Signed in
+    const authenticatedUser = await signInWithEmailAndPassword(auth, email, password)
+   
+    return authenticatedUser;
+    
+  } catch (e) {
+    const errorCode = e.code;
+    const errorMessage = e.message;
+  }
+}
+
 const ajouterUnObjet = async (obj, dataBase) => {
 
   try {
@@ -231,5 +248,6 @@ export {
   mettreAJourDocumentsAvecValeurParticulière,
   telDocumentExiste,
   deleteCollection,
-  createUser
+  createUser,
+  signIn
 }

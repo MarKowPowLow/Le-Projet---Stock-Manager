@@ -1,6 +1,6 @@
-import { ajouterUnObjet  } from "./fonctionsCRUDFirebase.js";
-import { tableauObjectDeChamp } from "./test.js";
-import { objetConstructeur } from "./fonctionsContruction.js"
+import { ajouterUnObjet  } from "./js/fonctionsCRUDFirebase.js";
+import { tableauObjectDeChamp } from "./js/test.js";
+import { objetConstructeur } from "./js/fonctionsContruction.js"
 
 // Function pour le bouton "croix-valider" qui declenche les fonctions base sur les inputs.
 let ajouterCollection = document.getElementById("ajout_BDD");
@@ -23,6 +23,17 @@ const creerCollection = (tableauObjectDeChamp) => {
   }
   console.log(objet);
   return objet;
+};
+
+// Vide les champs de text
+const viderChampText = (tableauDeChamps) => {
+  for (let obj of tableauDeChamps) {
+    let _input = document.createElement("input");
+    _input.value = "";
+    if (obj.type === "number") {
+      _input.value = 0;
+    }
+  }
 };
 
 export {

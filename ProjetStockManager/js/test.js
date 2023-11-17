@@ -1,4 +1,5 @@
-import{objetConstructeur} from "./fonctionsContruction.js"
+import { objetConstructeur } from "./fonctionsContruction.js"
+import { obtenirTouteLaCollection, trouverDocumentsAvecValeur } from "./fonctionsCRUDFirebase.js";
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -77,7 +78,18 @@ conteneurList.classList.add("conteneurliste")
 conteneurList.id = "conteneurliste"
 document.body.appendChild(conteneurList);
 
+// Creation conteneur depuis la BDD.
 
+let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
+
+for(let champ of tableauObjectBDD) {
+    console.log(champ.Nom);
+    let divChamp = document.createElement("div");
+    divChamp.classList.add("conteneurliste")
+    divChamp.id = champ.Nom
+    document.body.appendChild(divChamp);
+    console.log(champ);
+  }
 
 // Creation ecouteur evenement bouton valider
 /*validButton.addEventListener("click", () => {

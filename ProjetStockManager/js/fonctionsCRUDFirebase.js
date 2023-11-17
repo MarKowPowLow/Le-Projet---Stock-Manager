@@ -162,13 +162,16 @@ const supprimerTousLesDocumentsDeLaCollection = async (collectionName) => {
 
 const trouverDocumentsAvecValeur = async (collectionName, fieldName, targetValue) => {
   const collectionRef = collection(db, collectionName);
-
+  
   try {
     const querySnapshot = await getDocs(query(collectionRef, where(fieldName, '==', targetValue)));
 
     querySnapshot.forEach((doc) => {
-      console.log('Document ID: ', doc.id);
-      console.log('Document data: ', doc.data());
+      //console.log('Document ID: ', doc.id);
+      //console.log('Document data: ', doc.data());
+      let collection = doc.data();
+      console.log(collection)
+      return collection;
     });
   } catch (error) {
     console.log("Une erreur s'est produite : ", error);

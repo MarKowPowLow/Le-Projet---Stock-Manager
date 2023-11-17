@@ -1,5 +1,4 @@
-import { objetConstructeur } from "./fonctionsContruction.js"
-import { obtenirTouteLaCollection, trouverDocumentsAvecValeur } from "./fonctionsCRUDFirebase.js";
+import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -58,7 +57,7 @@ let tableauObjectDeChamp = [
 for(let champ of tableauObjectDeChamp) {
     if(champ.check!==false)
 
-{    let inputProduit = document.createElement("input");
+    {let inputProduit = document.createElement("input");
     inputProduit.setAttribute("type", champ.type);
     inputProduit.setAttribute("placeholder", champ.nom);
     inputProduit.setAttribute("id", champ.nom)
@@ -91,9 +90,9 @@ for(let champ of tableauObjectBDD) {
     console.log(champ);
   }
 
-// Creation ecouteur evenement bouton valider
-/*validButton.addEventListener("click", () => {
-    objetConstructeur()*/
+// Création écouteur événement bouton valider
+validButton.addEventListener("click", () => {
+    objetConstructeur() 
 
    /* listeobjet = document.createElement("div");
     listeobjet.classList.add("listeobjet");

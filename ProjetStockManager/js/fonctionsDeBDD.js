@@ -1,4 +1,4 @@
-import { ajouterUnObjet  } from "./fonctionsCRUDFirebase.js"
+import { ajouterUnObjet  } from "./fonctionsCRUDFirebase.js" 
 
 // Function pour le bouton "croix-valider" qui déclenche les fonctions basé sur les inputs.
 let ajouterCollection = document.getElementById("cercle_valider");

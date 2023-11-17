@@ -8,15 +8,15 @@ document.body.appendChild(topBar);
 
 
 // Création boutons et zone recherche
-let gestionUtilisateurButton = document.createElement("div");
-gestionUtilisateurButton.textContent = "Gestion utilisateurs";
-gestionUtilisateurButton.classList.add("topbutton")
-topBar.appendChild(gestionUtilisateurButton);
+let accueil = document.createElement("div");
+accueil.textContent = "Accueil";
+accueil.classList.add("topbutton")
+topBar.appendChild(accueil);
 
     // Création écouteur événement pour changer de page
 
-    gestionUtilisateurButton.addEventListener("click", () => {
-        document.location.href='gestionUtilisateur.html';
+    accueil.addEventListener("click", () => {
+        document.location.href='index.html';
     })
 
 
@@ -50,9 +50,8 @@ document.body.appendChild(divInput);
 
 let tableauObjectDeChamp = [
     {nom :"Nom", type:"text"},
-    {nom: "Référence", type: "text"},
-    {nom:"Quantité",type: "number"},
-    {nom: "Catégorie", type: "select"}
+    {nom: "Prénom", type: "text"},
+    {nom:"Email",type: "email"},
 ]
 
 for(let champ of tableauObjectDeChamp) {

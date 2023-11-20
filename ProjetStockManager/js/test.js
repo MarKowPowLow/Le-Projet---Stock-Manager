@@ -1,5 +1,5 @@
 import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
-import { obtenirTouteLaCollection  } from "./js/fonctionsCRUDFirebase.js";
+import { obtenirTouteLaCollection  } from "./fonctionsCRUDFirebase.js";
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -51,7 +51,7 @@ let tableauObjectDeChamp = [
     {nom:"Catégorie", type: "text"},
     {nom:"Prix",type: "number", step:"0.01", check:false},
     {nom:"Date", type:"date", check:false},
-    {nom:"Sous-Catégorie", type:"text", check:false},
+    {nom:"SousCatégorie", type:"text", check:false},
     {nom:"Unite", type:"text", check:false}
 ]
 
@@ -82,13 +82,37 @@ document.body.appendChild(conteneurList);
 
 let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
 
+// Formater un Tableau d'object pour mettre la collection dans l'ordre
+
 for(let champ of tableauObjectBDD) {
-    console.log(champ.Nom);
+   console.log(champ);
+    let tableObject = {
+        nom: champ.Nom,
+        ref: champ.Référence,
+        qte: champ.Quantité,
+        cat: champ.Catégorie,
+        prix: champ.Prix,
+        date: champ.Date,
+        sCat: champ.SousCatégorie,
+        unite: champ.Unite,
+      }
+    console.log(tableObject)
     let divChamp = document.createElement("div");
-    divChamp.classList.add("conteneurliste")
-    divChamp.id = champ.Nom
-    document.body.appendChild(divChamp);
-    console.log(champ);
+    divChamp.classList.add("divChamp");
+
+    Object.keys(tableObject).forEach(element => {
+       //console.log(champ[element])
+       if (tableObject[element] != undefined){
+        let divConteneur = document.createElement("div");
+        divConteneur.classList.add("divConteneur");
+        divConteneur.textContent = tableObject[element];
+        divChamp.appendChild(divConteneur);
+       }
+    })
+
+    conteneurList.appendChild(divChamp);
+    //console.log(champ);
+    
   }
 
 // Création écouteur événement bouton valider

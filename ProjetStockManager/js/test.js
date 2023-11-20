@@ -1,6 +1,6 @@
 import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
+import{verifRegex} from "./ControleSaisieUsers.js"
 import { obtenirTouteLaCollection  } from "./fonctionsCRUDFirebase.js";
-
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -128,6 +128,7 @@ for(let champ of tableauObjectBDD) {
 };
 
 // Création écouteur événement bouton valider
+
 /*validButton.addEventListener("click", () => {
     objetConstructeur()
 
@@ -158,5 +159,9 @@ for(let champ of tableauObjectBDD) {
     deleteButtonConteneurListe.className = "imagesupprimer";
     listeobjet.appendChild(deleteButtonConteneurListe);
 })*/
+
+validButton.addEventListener("click", () => {
+    verifRegex()
+}) 
 
 export{tableauObjectDeChamp}

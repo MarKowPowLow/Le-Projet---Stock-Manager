@@ -1,4 +1,5 @@
 import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
+import{verifRegex} from "./ControleSaisieUsers.js"
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -44,8 +45,8 @@ document.body.appendChild(divInput);
 // Création des Input
 
 let tableauObjectDeChamp = [
-    {nom :"Nom", type:"text"},
-    {nom: "Référence", type: "text"},
+    {nom:"Nom", type:"text"},
+    {nom:"Référence", type: "text"},
     {nom:"Quantité",type: "number", step:"1"},
     {nom: "Catégorie", type: "text"},
     {nom: "prix",type: "number", step:"0.01", check:false},
@@ -81,35 +82,8 @@ document.body.appendChild(conteneurList);
 
 // Création écouteur événement bouton valider
 validButton.addEventListener("click", () => {
-    objetConstructeur() 
-
-   /* listeobjet = document.createElement("div");
-    listeobjet.classList.add("listeobjet");
-    conteneurList.appendChild(listeobjet);
-    objetConstructeur()
-    // Création des divs contenant la valeur des inputs
-   
-    objetProduit = document.createElement("div");
-    objetProduit.textContent = inputProduit.value;
-    listeobjet.appendChild(objetProduit);
-
-    objetReference = document.createElement("div");
-    objetReference.textContent = inputReference.value;
-    listeobjet.appendChild(objetReference);
-
-    objetQuantite = document.createElement("div");
-    objetQuantite.textContent = inputQuantite.value;
-    listeobjet.appendChild(objetQuantite);
-
-    objetCategorie = document.createElement("div");
-    objetCategorie.textContent = inputCategorie.value;
-    listeobjet.appendChild(objetCategorie);
-
-    deleteButtonConteneurListe = document.createElement("img");
-    deleteButtonConteneurListe.src ="./img/circle-xmark-regular.svg";
-    deleteButtonConteneurListe.className = "imagesupprimer";
-    listeobjet.appendChild(deleteButtonConteneurListe)*/;
-})
+    verifRegex()
+}) 
 
 export{tableauObjectDeChamp}
 

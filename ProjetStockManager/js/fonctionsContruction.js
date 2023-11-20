@@ -38,6 +38,7 @@ async function objetConstructeur() {
             temp.value = ""
         }
     }
+
     let objet = await ajouterUnObjet (obj, obj.Catégorie)
     console.log(typeof(objet.id))
 
@@ -147,8 +148,6 @@ popUpButton =creerUnElement("popUpButton","div", popUpModifObjet)
 }
 
 // ###### pop up #########
-
-
 
 
 export { constructeurContainerPrincipal, objetConstructeur, affichagePopUpModifObjet, ajoutBackgroundFlou }

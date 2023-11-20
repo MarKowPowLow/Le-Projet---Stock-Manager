@@ -1,15 +1,16 @@
 import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
 import { obtenirTouteLaCollection  } from "./fonctionsCRUDFirebase.js";
+
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
-// Creation conteneur Top Bar
+// Création conteneur Top Bar
 let topBar = document.createElement("div");
 topBar.classList.add("topbar");
 document.body.appendChild(topBar);
 
 
-// Creation boutons et zone recherche
+// Création boutons et zone recherche
 let gestionUtilisateurButton = document.createElement("div");
 gestionUtilisateurButton.textContent = "Gestion utilisateurs";
 gestionUtilisateurButton.classList.add("topbutton")
@@ -17,7 +18,7 @@ topBar.appendChild(gestionUtilisateurButton);
 
 
 let gererCategories = document.createElement("div");
-gererCategories.textContent = "Gerer les categories";
+gererCategories.textContent = "Gérer les catégories";
 gererCategories.classList.add("topbutton");
 topBar.appendChild(gererCategories);
 
@@ -36,13 +37,13 @@ topBar.appendChild(submit);
 
 
 
-// Creation Div Inputs
+// Création Div Inputs
 let divInput = document.createElement("div");
 divInput.classList.add("divinput");
 document.body.appendChild(divInput);
 
 
-// Creation des Input
+// Création des Input
 
 let tableauObjectDeChamp = [
     {nom:"Nom", type:"text"},
@@ -71,19 +72,18 @@ validButton.className = "imagevalider";
 validButton.id = "ajout_BDD";
 divInput.appendChild(validButton);
 
-// Creation conteneur liste
+// Création conteneur liste
 
 let conteneurList = document.createElement("div");
 conteneurList.classList.add("conteneurliste")
 conteneurList.id = "conteneurliste"
 document.body.appendChild(conteneurList);
 
-// Creation conteneur depuis la BDD.
+// Création conteneur depuis la BDD.
 
 let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
 
 // Formater un Tableau d'object pour mettre la collection dans l'ordre
-
 for(let champ of tableauObjectBDD) {
    console.log(champ);
     let tableObject = {
@@ -116,8 +116,8 @@ for(let champ of tableauObjectBDD) {
   }
 
 // Création écouteur événement bouton valider
-validButton.addEventListener("click", () => {
-    objetConstructeur() 
+/*validButton.addEventListener("click", () => {
+    objetConstructeur()
 
    /* listeobjet = document.createElement("div");
     listeobjet.classList.add("listeobjet");
@@ -144,7 +144,7 @@ validButton.addEventListener("click", () => {
     deleteButtonConteneurListe = document.createElement("img");
     deleteButtonConteneurListe.src ="./img/circle-xmark-regular.svg";
     deleteButtonConteneurListe.className = "imagesupprimer";
-    listeobjet.appendChild(deleteButtonConteneurListe)*/;
-})
+    listeobjet.appendChild(deleteButtonConteneurListe);
+})*/
 
 export{tableauObjectDeChamp}

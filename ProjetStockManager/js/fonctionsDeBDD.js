@@ -9,7 +9,7 @@ ajouterCollection.addEventListener("click", () => {
   let dataBase = document.getElementById("Catégorie").value;
 
   ajouterUnObjet(obj, dataBase);
-  objetConstructeur(tableauObjectDeChamp)
+  objetConstructeur(tableauObjectDeChamp);
   //viderChampText(tableauObjectDeChamp);
 });
 

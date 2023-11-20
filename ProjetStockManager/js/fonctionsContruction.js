@@ -38,6 +38,7 @@ function objetConstructeur() {
             temp.value = ""
         }
     }
+
     //création des lignes du tableau et complétion en fonction des valeurs de l'objet 
 
     let parentLigne = document.createElement("div")
@@ -140,8 +141,6 @@ popUpButton =creerUnElement("popUpButton","div", popUpModifObjet)
 }
 
 // ###### pop up #########
-
-
 
 
 export { constructeurContainerPrincipal, objetConstructeur, affichagePopUpModifObjet, ajoutBackgroundFlou }

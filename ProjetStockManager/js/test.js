@@ -1,4 +1,5 @@
 import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
+import { obtenirTouteLaCollection  } from "./js/fonctionsCRUDFirebase.js";
 // ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
 
 
@@ -120,7 +121,6 @@ validButton.addEventListener("click", () => {
     deleteButtonConteneurListe.src ="./img/circle-xmark-regular.svg";
     deleteButtonConteneurListe.className = "imagesupprimer";
     listeobjet.appendChild(deleteButtonConteneurListe)*/;
-//})
+})
 
 export{tableauObjectDeChamp}
-

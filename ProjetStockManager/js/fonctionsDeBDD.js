@@ -26,7 +26,7 @@ const creerCollection = (tableauObjectDeChamp) => {
 };
 
 // Prototype: Function pour obtenir les "Categories" pour appeler la base de donnée.
-/*const telechargerCollection = (tableauObjectDeChamp) =>{.
+/* const telechargerCollection = (tableauObjectDeChamp) =>{
   let categorieName = "";
   for (let obj of tableauObjectDeChamp) {
     if(document.getElementById(obj.Categorie)){

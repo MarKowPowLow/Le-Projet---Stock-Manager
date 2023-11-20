@@ -95,7 +95,7 @@ for(let champ of tableauObjectBDD) {
         date: champ.Date,
         sCat: champ.SousCatégorie,
         unite: champ.Unite,
-      }
+      };
     console.log(tableObject)
     let divChamp = document.createElement("div");
     divChamp.classList.add("divChamp");
@@ -107,19 +107,25 @@ for(let champ of tableauObjectBDD) {
         divConteneur.classList.add("divConteneur");
         divConteneur.textContent = tableObject[element];
         divChamp.appendChild(divConteneur);
-       }
-    })
+       };
+    });
 
     conteneurList.appendChild(divChamp);
     //console.log(champ);
 
-    let supprimeButton = document.createElement("img");
+    /*let supprimeButton = document.createElement("img");
     supprimeButton.src = "./img/trash-can-regular.svg";
     supprimeButton.className = "imagesupprimer";
     supprimeButton.id = "supprime_BDD";
     divChamp.appendChild(supprimeButton);
-    
-  }
+
+    let supprimerCollection = divChamp.getElementById("supprime_BDD");
+    supprimerCollection.addEventListener("click", () => {
+        supprimerUnDocument(tableObject[cat], tableObject[ref]);
+        divChamp.removeChild(divConteneur);
+        //objetDEConstructeur(tableauObjectDeChamp);
+        });*/
+};
 
 // Création écouteur événement bouton valider
 /*validButton.addEventListener("click", () => {

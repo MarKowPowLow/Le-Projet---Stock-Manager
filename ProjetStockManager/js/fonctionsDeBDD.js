@@ -1,5 +1,5 @@
 import { ajouterUnObjetAvecIdSpécifique  } from "./fonctionsCRUDFirebase.js";
-import { tableauObjectDeChamp } from "./test.js";
+import { tableauObjectDeChamp,  } from "./test.js";
 import { objetConstructeur } from "./fonctionsContruction.js"
 
 // Function pour le bouton "croix-valider" qui declenche les fonctions base sur les inputs.
@@ -24,14 +24,7 @@ const creerCollection = (tableauObjectDeChamp) => {
   return objet;
 };
 
-/* let supprimerCollection = document.getElementById("supprime_BDD");
-supprimerCollection.addEventListener("click", () => {
-  let obj = creerCollection(tableauObjectDeChamp);
-  let dataBase = document.getElementById("Catégorie").value;
 
-  supprimerUnDocument(obj, dataBase);
-  objetConstructeur(tableauObjectDeChamp);
-}); */
 
 // Prototype: Function pour obtenir les "Categories" pour appeler la base de donnée.
 /* const telechargerCollection = (tableauObjectDeChamp) =>{

@@ -69,10 +69,10 @@ if (inputCatégorie.value == "") {
     }
 
 
-    // Prix
-let inputPrix = document.getElementById("Prix")
+    // prix
+let inputprix = document.getElementById("prix")
 
-if (inputPrix.value == "") {
+if (inputprix.value == "") {
 
     window.alert("Il manque des caractères non ?")
     return;
@@ -80,16 +80,16 @@ if (inputPrix.value == "") {
 } else {
 
     const regexPrix = new RegExp ("^([0-9]{0,})*[,.]([0-9]{2})*$","g");
-    if (regexPrix.test(inputPrix.value) === false) {
+    if (regexPrix.test(inputprix.value) === false) {
         window.alert("Vous avez entré des caractères incorrect (Chiffres = * | ***.**)).")
         return}
     }
 
 
-    // Sous-Catégorie
-let inputSousCatégorie = document.getElementById("Sous-Catégorie")
+    // sousCatégorie
+let inputsousCatégorie = document.getElementById("sousCatégorie")
 
-if (inputSousCatégorie.value == "") {
+if (inputsousCatégorie.value == "") {
 
     window.alert("Il manque des caractères non ?")
     return;
@@ -97,7 +97,7 @@ if (inputSousCatégorie.value == "") {
 } else {
 
     const regexSousCategorie = new RegExp ("^([A-Za-zÀ-ÖÙ-öù-ÿ\\s])*$","g");
-    if (regexSousCategorie.test(inputSousCatégorie.value) === false) {
+    if (regexSousCategorie.test(inputsousCatégorie.value) === false) {
         window.alert("Vous avez entré des caractères incorrect (Lettres seulement).")
         return}
     }

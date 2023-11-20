@@ -237,7 +237,21 @@ const deleteCollection = async (collectionPath) => {
   } catch (error) {
     console.error("Error deleting collection: ", error);
   }
-};
+};/* Récupération d'un objet en fonction de son Id */
+const RécupérerObjet = async (database, objectId) => {
+  let retour;
+  const collection = await obtenirTouteLaCollection(database)
+  console.log(collection)
+  collection.forEach(element => { 
+    if (element.id == objectId) {
+      retour = element
+      return retour;
+    }
+  });
+  return retour;
+}
+
+
 
 
 export {
@@ -252,5 +266,6 @@ export {
   telDocumentExiste,
   deleteCollection,
   createUser,
-  signIn
+  signIn,
+  RécupérerObjet
 }

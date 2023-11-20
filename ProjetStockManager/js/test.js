@@ -50,10 +50,10 @@ let tableauObjectDeChamp = [
     {nom:"Référence", type: "text"},
     {nom:"Quantité",type: "number", step:"1"},
     {nom:"Catégorie", type: "text"},
-    {nom:"Prix",type: "number", step:"0.01", check:true},
+    {nom:"Prix",type: "number", step:"0.01", check:false},
     {nom:"Date", type:"date", check:false},
     {nom:"SousCatégorie", type:"text", check:false},
-    {nom:"Unite", type:"text", check:false}
+    {nom:"Unité", type:"text", check:false}
 ]
 
 for(let champ of tableauObjectDeChamp) {

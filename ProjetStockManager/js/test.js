@@ -1,7 +1,7 @@
-import{objetConstructeur, /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
+import{objetConstructeur  /*affichagePopUpModifObjet, ajoutBackgroundFlou*/} from "./fonctionsContruction.js"
 import{verifRegex} from "./ControleSaisieUsers.js"
-import { obtenirTouteLaCollection  } from "./fonctionsCRUDFirebase.js";
-// ---------------------------------------------------------------------------- Variables Globale -------------------------------------------------------------------------------//
+import { obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument,  } from "./fonctionsCRUDFirebase.js";
+// ---------------------------------- Variables Globale ----------------------//
 
 
 // Création conteneur Top Bar
@@ -50,20 +50,20 @@ let tableauObjectDeChamp = [
     {nom:"Référence", type: "text"},
     {nom:"Quantité",type: "number", step:"1"},
     {nom:"Catégorie", type: "text"},
-    {nom:"Prix",type: "number", step:"0.01", check:false},
+    {nom:"Prix",type: "number", step:"0.01", check:true},
     {nom:"Date", type:"date", check:false},
     {nom:"SousCatégorie", type:"text", check:false},
     {nom:"Unite", type:"text", check:false}
 ]
 
 for(let champ of tableauObjectDeChamp) {
-    if(champ.check!==false)
-
-    {let inputProduit = document.createElement("input");
+    if(champ.check!==false) {
+    let inputProduit = document.createElement("input");
     inputProduit.setAttribute("type", champ.type);
     inputProduit.setAttribute("placeholder", champ.nom);
     inputProduit.setAttribute("id", champ.nom)
-    divInput.appendChild(inputProduit);}
+    divInput.appendChild(inputProduit);
+    };
 }
 
 let validButton = document.createElement("img");
@@ -105,6 +105,7 @@ for(let champ of tableauObjectBDD) {
        if (tableObject[element] != undefined){
         let divConteneur = document.createElement("div");
         divConteneur.classList.add("divConteneur");
+        divConteneur.setAttribute("id", element);
         divConteneur.textContent = tableObject[element];
         divChamp.appendChild(divConteneur);
        };
@@ -113,7 +114,7 @@ for(let champ of tableauObjectBDD) {
     conteneurList.appendChild(divChamp);
     //console.log(champ);
 
-    /*let supprimeButton = document.createElement("img");
+    /* let supprimeButton = document.createElement("img");
     supprimeButton.src = "./img/trash-can-regular.svg";
     supprimeButton.className = "imagesupprimer";
     supprimeButton.id = "supprime_BDD";
@@ -124,7 +125,7 @@ for(let champ of tableauObjectBDD) {
         supprimerUnDocument(tableObject[cat], tableObject[ref]);
         divChamp.removeChild(divConteneur);
         //objetDEConstructeur(tableauObjectDeChamp);
-        });*/
+        }); */
 };
 
 // Création écouteur événement bouton valider

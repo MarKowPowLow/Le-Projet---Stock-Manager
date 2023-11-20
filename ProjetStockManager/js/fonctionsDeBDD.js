@@ -1,13 +1,13 @@
-import { ajouterUnObjetAvecIdSpécifique  } from "./js/fonctionsCRUDFirebase.js";
-import { tableauObjectDeChamp } from "./js/test.js";
-import { objetConstructeur } from "./js/fonctionsContruction.js"
+import { ajouterUnObjetAvecIdSpécifique  } from "./fonctionsCRUDFirebase.js";
+import { tableauObjectDeChamp } from "./test.js";
+import { objetConstructeur } from "./fonctionsContruction.js"
 
 // Function pour le bouton "croix-valider" qui declenche les fonctions base sur les inputs.
 let ajouterCollection = document.getElementById("ajout_BDD");
 ajouterCollection.addEventListener("click", () => {
   let obj = creerCollection(tableauObjectDeChamp);
   let dataBase = document.getElementById("Catégorie").value;
-
+  console.log(obj)
   ajouterUnObjetAvecIdSpécifique(obj, dataBase, obj.Référence);
   objetConstructeur(tableauObjectDeChamp);
 });

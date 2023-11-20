@@ -47,10 +47,10 @@ let tableauObjectDeChamp = [
     {nom :"Nom", type:"text"},
     {nom: "Référence", type: "text"},
     {nom:"Quantité",type: "number", step:"1"},
-    {nom: "Catégorie", type: "text", check: false},
+    {nom: "Catégorie", type: "text"},
     {nom: "prix",type: "number", step:"0.01", check:false},
     {nom:"date", type:"date", check:false},
-    {nom:"sous catégorie", type:"text", check:false},
+    {nom:"sousCatégorie", type:"text", check:false},
     {nom:"Unité", type:"text", check:false}
 ]
 

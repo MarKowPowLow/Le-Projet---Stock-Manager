@@ -1,5 +1,5 @@
 import { tableauObjectDeChamp } from "./test.js"
-import { trouverDocumentsAvecValeur, ajouterUnObjet, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
+import { RécupérerObjet, ajouterUnObjet, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
 let popUpTab;
 let popUpModifObjet
 let popUpButton
@@ -24,9 +24,9 @@ const constructeurContainerPrincipal = (text) => {
 
 
 }
-//######   construction de la ligne enfants contenant les information saisi.#############
+//######   construction de l'Objet contenant les information saisi.#############
 
-function objetConstructeur() {
+async function objetConstructeur() {
     let obj = {}
     let conteneurliste = document.getElementById("conteneurliste")
 
@@ -38,18 +38,19 @@ function objetConstructeur() {
             temp.value = ""
         }
     }
-    //création des lignes du tableau et complétion en fonction des valeurs de l'objet 
+    let objet = await ajouterUnObjet (obj, obj.Catégorie)
+    console.log(typeof(objet.id))
 
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")
-    parentLigne.id = `ligne${ligneNumber}`
-    parentLigne.addEventListener("click", () => {
-        ligneNumber++
-        affichagePopUpModifObjet()
-        return ligneNumber
+    parentLigne.id = objet.id
+    ligneNumber++
+    parentLigne.addEventListener("click", (e) => {
+        affichagePopUpModifObjet(e)
     })
-
     conteneurliste.appendChild(parentLigne)
+
+
     //création des éléments correspondants aux propriétés et aux valeurs associés des inputs
     for (let temp in obj) {
 
@@ -68,14 +69,15 @@ function ajoutBackgroundFlou() {
 
 }
 //ajout de la fonction pour afficher le popUp sur le flou
-function affichagePopUpModifObjet() {
+function affichagePopUpModifObjet(e) {
+    let target = e.target;
     ajoutBackgroundFlou()
     popUpModifObjet = document.createElement('div');
     popUpModifObjet.id = 'popUpModifObjet'
 
 
     flou.appendChild(popUpModifObjet)
-    interaction()
+    interaction(target)
     //trouverDocumentsAvecValeur()
 
 
@@ -111,21 +113,25 @@ function creerUneLigne(){
 
 // ###### Pop up tableau #########
 
-function interaction(){
+async function interaction(target){
     popUpTab =creerUnElement("popUpTab","div", popUpModifObjet)
 
-console.log(popUpTab,popUpModifObjet,"****")
 
+//Apparition des lignes en fonction du tableau "tableauObjectDeChamp"
 
-
-        // ##### pop up col 1 #####
-
-            creerUneLigne()
-
-        // ##### pop up col 2 #####
-
-            creerUneLigne()
-
+    //recuprération de l'objet en fonction du nom de la ligne
+let objet  = await RécupérerObjet (target.children[3].textContent, target.id);
+console.log(objet)
+let tabObjet =[]
+for(let valeur in objet){
+    tabObjet.push(valeur)
+}
+console.log(tabObjet)
+for(let element in tableauObjectDeChamp){
+    creerUneLigne();
+    popUpPropriete.textContent = tableauObjectDeChamp[element].nom;
+    popUpInput.placeholder = objet[element]
+}
 // ###### pop up button ##########
 popUpButton =creerUnElement("popUpButton","div", popUpModifObjet)
 

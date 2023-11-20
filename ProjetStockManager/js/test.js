@@ -112,6 +112,12 @@ for(let champ of tableauObjectBDD) {
 
     conteneurList.appendChild(divChamp);
     //console.log(champ);
+
+    let supprimeButton = document.createElement("img");
+    supprimeButton.src = "./img/trash-can-regular.svg";
+    supprimeButton.className = "imagesupprimer";
+    supprimeButton.id = "supprime_BDD";
+    divChamp.appendChild(supprimeButton);
     
   }
 

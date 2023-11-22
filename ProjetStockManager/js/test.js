@@ -16,12 +16,6 @@ gestionUtilisateurButton.textContent = "Gestion utilisateurs";
 gestionUtilisateurButton.classList.add("topbutton")
 topBar.appendChild(gestionUtilisateurButton);
 
-    // Création écouteur événement pour changer de page
-
-    gestionUtilisateurButton.addEventListener("click", () => {
-        document.location.href='gestionUtilisateur.html';
-    })
-
 
 let gererCategories = document.createElement("div");
 gererCategories.textContent = "Gérer les catégories";

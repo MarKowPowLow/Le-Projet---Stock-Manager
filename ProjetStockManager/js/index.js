@@ -1,5 +1,7 @@
 import{objetConstructeur} from "./fonctionsContruction.js"
-import { tableauObjectDeChamp, choixInput } from "./variablesGlobales.js";
+import{tableauObjectDeChamp, choixInput} from "./variablesGlobales.js";
+import{verifRegex} from "./ControleSaisieUsers.js"
+import{obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument} from "./fonctionsCRUDFirebase.js";
 
 let divInput;
 let conteneurList;
@@ -78,7 +80,7 @@ document.body.appendChild(adminPopUp);
     }
 
     // Création div conteneur check box
-   
+
     let CheckBoxContainer = document.createElement("div");
     CheckBoxContainer.classList.add("adminpopupdivcheckbox");
     adminPopUp.appendChild(CheckBoxContainer);
@@ -102,7 +104,7 @@ document.body.appendChild(adminPopUp);
 
     checkBox.addEventListener("click", () => {
                 toggleCheckBox(checkBox.id)
-             })
+            })
     
             }
     divCheckBox.appendChild(textCheckBox);
@@ -135,7 +137,7 @@ topBar.appendChild(divRecherche);
 //---------------------------------------------------- CREATION FONCTIONS -------------------------------------------------------//
 
     function creationDivIput () {
-   
+
         // Création Div Inputs
         divInput = document.createElement("div");
         divInput.classList.add("divinput");
@@ -145,7 +147,7 @@ topBar.appendChild(divRecherche);
         // Création des Input
         for(let champ of tableauObjectDeChamp) {
             if(champ.check!==false) {
-           
+
                 let inputProduit = document.createElement("input");
                 inputProduit.setAttribute("type", champ.type);
                 inputProduit.setAttribute("placeholder", champ.nom);
@@ -173,16 +175,13 @@ creationDivIput()
 
 
 
-
-
-
 function toggleCheckBox (input) {
     console.log(input)
     console.log(tableauObjectDeChamp)
     for(let champ in tableauObjectDeChamp){
     if (tableauObjectDeChamp[champ].nom === input){
     tableauObjectDeChamp[champ].check = !tableauObjectDeChamp[champ].check
-   
+
 
     suppressionDivInput()
     suprimerContenaireListe()
@@ -204,13 +203,9 @@ document.body.appendChild(conteneurList);
 
 
 
-
-
 function suppressionDivInput(){
     divInput.remove()
 }
-
-
 
 
 
@@ -219,6 +214,44 @@ function suprimerContenaireListe(){
 }
 
 creerContenaireListe()
+
+
+let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
+
+// Formater un Tableau d'object pour mettre la collection dans l'ordre
+for(let champ of tableauObjectBDD) {
+    console.log(champ);
+    let tableObject = {
+        nom: champ.Nom,
+        ref: champ.Référence,
+        qte: champ.Quantité,
+        cat: champ.Catégorie,
+        prix: champ.Prix,
+        date: champ.Date,
+        sCat: champ.SousCatégorie,
+        unite: champ.Unite,
+        };
+    console.log(tableObject)
+    let divChamp = document.createElement("div");
+    divChamp.classList.add("divChamp");
+
+    Object.keys(tableObject).forEach(element => {
+       //console.log(champ[element])
+        if (tableObject[element] != undefined){
+        let divConteneur = document.createElement("div");
+        divConteneur.classList.add("divConteneur");
+        divConteneur.setAttribute("id", element);
+        divConteneur.textContent = tableObject[element];
+        divChamp.appendChild(divConteneur);
+        };
+    });
+
+    conteneurList.appendChild(divChamp);
+}
+
+validButton.addEventListener("click", () => {
+    verifRegex()
+}) 
 
 //---------------------------------------------- EXPORT --------------------------------------------------------//
 

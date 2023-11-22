@@ -1,24 +1,8 @@
-import { signIn, createUser, obtenirTouteLaCollection, ajouterUnObjet } from "./fonctionsCRUDFirebase.js"
+import { signIn, createUser, obtenirTouteLaCollection, ajouterUnObjet, supprimerUnDocument } from "./fonctionsCRUDFirebase.js"
+import { deleteUser } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 
-const authentificationEtAjoutRole = async (database, email, password) => {
-
-    const user = await signIn(email, password);
-    console.log(user)
-
-    const users = await obtenirTouteLaCollection(database)
-
-    users.forEach(usrs => {
-
-        if (usrs.email === user.user.email) {
-
-            console.log("Match !")
-
-        }
-
-    });
-
-}
+/* Fonction de création de compte utilisateur dans le composant d'authentification et dans la base FireStore */
 
 const creationEtAjoutUser = async (database, email, password, role) => {
 
@@ -29,6 +13,7 @@ const creationEtAjoutUser = async (database, email, password, role) => {
     /* Définition d'un objet type a inscrire en base de données */
     let config = {
         email: email,
+        password: password,
         role: role,
     }
 
@@ -46,7 +31,7 @@ const creationEtAjoutUser = async (database, email, password, role) => {
 
                     console.log("Utilisateur déja éxistant en base !")
 
-                    console.log(users)
+                    console.error(users)
 
                 } else {
 
@@ -66,7 +51,7 @@ const creationEtAjoutUser = async (database, email, password, role) => {
 
         } else {
 
-            console.log("Utilisateur non trouvé, création de celui-ci en base.....")
+            console.log("Base vide, création de l'utilisateur en BDD.....")
 
             const userAccount = await createUser(email, password)
 
@@ -85,7 +70,83 @@ const creationEtAjoutUser = async (database, email, password, role) => {
     }
 }
 
+
+/* Fonction de récupération du compte utilisateur connécté, avec comparaison entre celui-ci et son équivalent 
+    en base FireStore pour avoir accés à ses propriétés d'objets */
+
+const authentificationEtRecupération = async (database, email, password) => {
+    let test = null;
+    /* constante qui récupére la connexion utilisateur par le biais de la fonction signIn*/
+    const account = await signIn(email, password)
+    console.log("account : ", account)
+
+    /* constante qui récupére tout les utilisateurs enregistrés sur FireStore par le biais de la fonction
+        obtenirTouteLaCollection */
+    const users = await obtenirTouteLaCollection(database)
+    //console.log("database : ", users)
+
+    if (account) {
+
+        /* Condition de vérification "SI la base de données FireStore n'est pas vide ET si la connexion renvoie bien 
+            quelquechose..." */
+        if ((users.length > 0)) {
+
+            /* Boucle de parcours du tableau de la collection users renvoyée par la fonction obtenirTouteLaCollection */
+            users.forEach(usrs => {
+
+                if ((usrs.email === account.user.email)) {
+
+                    //console.log("OK !")
+                    test = usrs;
+                    return usrs
+
+                } else {
+
+                    console.log("Erreur ! Utilisateur trouvé dans le Auth, mais absent de la BDD ! Ajoutez l'utilisateur dans la BDD  via la fonction AjouterObjet ou via l'interface graphique !")
+                    console.error(users)
+
+                }
+
+            });
+        } else {
+
+            console.log("Erreur ! BDD vide !")
+            console.error(users)
+
+        }
+
+    } else {
+
+        console.error("Source : authentificationEtRecupération : 'Utilisateur Inconnu'")
+        // Création de div "Utilisateur inconnu" ?
+
+    }
+    return test;
+}
+
+/* Fonction de suppression d'un utilisateur en base de données */
+
+const SupprimerUtilisateur = async (database, email, id) => {
+
+    const users = obtenirTouteLaCollection(database)
+
+    users.forEach(usrs => {
+
+       if ((usrs.email === email) && (usrs.id === id)) {
+
+            // Fenêtre DIALOG/confirm ?
+        
+       }
+
+
+        
+        
+    });
+
+}
+
 export {
     creationEtAjoutUser,
-    authentificationEtAjoutRole,
+    authentificationEtRecupération,
+    SupprimerUtilisateur
 }

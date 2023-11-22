@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, query, where, setDoc }
   from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -162,13 +162,16 @@ const supprimerTousLesDocumentsDeLaCollection = async (collectionName) => {
 
 const trouverDocumentsAvecValeur = async (collectionName, fieldName, targetValue) => {
   const collectionRef = collection(db, collectionName);
-
+  
   try {
     const querySnapshot = await getDocs(query(collectionRef, where(fieldName, '==', targetValue)));
 
     querySnapshot.forEach((doc) => {
-      console.log('Document ID: ', doc.id);
-      console.log('Document data: ', doc.data());
+      //console.log('Document ID: ', doc.id);
+      //console.log('Document data: ', doc.data());
+      let collection = doc.data();
+      console.log(collection)
+      return collection;
     });
   } catch (error) {
     console.log("Une erreur s'est produite : ", error);
@@ -234,7 +237,21 @@ const deleteCollection = async (collectionPath) => {
   } catch (error) {
     console.error("Error deleting collection: ", error);
   }
-};
+};/* Récupération d'un objet en fonction de son Id */
+const RécupérerObjet = async (database, objectId) => {
+  let retour;
+  const collection = await obtenirTouteLaCollection(database)
+  console.log(collection)
+  collection.forEach(element => { 
+    if (element.id == objectId) {
+      retour = element
+      return retour;
+    }
+  });
+  return retour;
+}
+
+
 
 
 export {
@@ -249,5 +266,6 @@ export {
   telDocumentExiste,
   deleteCollection,
   createUser,
-  signIn
+  signIn,
+  RécupérerObjet
 }

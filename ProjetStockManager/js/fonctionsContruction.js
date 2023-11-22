@@ -137,14 +137,16 @@ for(let element in tableauObjectDeChamp){
 // ###### pop up button ##########
 popUpButton =creerUnElement("popUpButton","div", popUpModifObjet)
 
+
     //##### pop up Modify #####
     popUpModify= creerUnElement("popUpModify","button", popUpButton)
-
+    popUpModify.textContent = "Modifier"
     //##### pop up Supp ######
     popUpSupp =creerUnElement("popUpSupp", "button",popUpButton)
-
+    popUpSupp.textContent = "Supprimer"
     //###### pop up Close ######
     popUpClose =creerUnElement("popUpClose", "button", popUpButton)
+    popUpClose.textContent = "Annuler"
 }
 
 // ###### pop up #########

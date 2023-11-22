@@ -27,7 +27,7 @@ const constructeurContainerPrincipal = (text) => {
 }
 //######   construction de l'Objet contenant les information saisi.#############
 
-async function objetConstructeur() {
+function objetConstructeur() {
     let obj = creerCollection(tableauObjectDeChamp);
     let conteneurliste = document.getElementById("conteneurliste")
 
@@ -41,9 +41,9 @@ async function objetConstructeur() {
     }*/
     
 
-    let objet = await ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
+    let objet = ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
     //console.log(typeof(obj.id));
-    console.log(obj);
+    //console.log(obj);
 
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")

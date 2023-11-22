@@ -1,5 +1,6 @@
 import { tableauObjectDeChamp } from "./variablesGlobales.js"
-import { RécupérerObjet, ajouterUnObjet, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
+import { creerCollection } from "./fonctionsDeBDD.js"
+import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
 let popUpTab;
 let popUpModifObjet
 let popUpButton
@@ -27,20 +28,21 @@ const constructeurContainerPrincipal = (text) => {
 //######   construction de l'Objet contenant les information saisi.#############
 
 async function objetConstructeur() {
-    let obj = {}
+    let obj = creerCollection(tableauObjectDeChamp);
     let conteneurliste = document.getElementById("conteneurliste")
 
-    //récupération des valeurs des inputs
+    /*//récupération des valeurs des inputs
     for (let ob in tableauObjectDeChamp) {
         let temp = document.getElementById(tableauObjectDeChamp[ob].nom)
         if (temp !== null) {
             obj[temp.id] = temp.value
             temp.value = ""
         }
-    }
+    }*/
+    
 
-    let objet = await ajouterUnObjet (obj, obj.Catégorie)
-    console.log(typeof(objet.id))
+    let objet = await ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
+    console.log(typeof(obj.id))
 
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")

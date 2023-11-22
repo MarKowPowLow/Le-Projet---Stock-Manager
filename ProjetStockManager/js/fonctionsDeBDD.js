@@ -3,20 +3,20 @@ import { tableauObjectDeChamp } from "./variablesGlobales.js";
 import { objetConstructeur } from "./fonctionsContruction.js"
 
 // Function pour le bouton "croix-valider" qui declenche les fonctions base sur les inputs.
-let ajouterCollection = document.getElementById("ajout_BDD");
-ajouterCollection.addEventListener("click", () => {
-  let obj = creerCollection(tableauObjectDeChamp);
-  let dataBase = document.getElementById("Catégorie").value;
-  console.log(obj)
-  ajouterUnObjetAvecIdSpécifique(obj, dataBase, obj.Référence);
-  objetConstructeur(tableauObjectDeChamp);
-});
+
+const ajouterUneCollection = () => {
+  let ajouterCollection = document.getElementById("ajout_BDD");
+  ajouterCollection.addEventListener("click", () => {
+    objetConstructeur(tableauObjectDeChamp); 
+  });
+}
+
 
 // Creer un objet en prenant les valeurs des champs de text
 const creerCollection = (tableauObjectDeChamp) => {
   let objet = {};
   for (let obj of tableauObjectDeChamp) {
-    if(document.getElementById(obj.nom)){
+    if(document.getElementById(obj.nom)) {
       objet[obj.nom] = document.getElementById(obj.nom).value;
     }
   }
@@ -40,5 +40,6 @@ const creerCollection = (tableauObjectDeChamp) => {
 
 
 export {
-  ajouterCollection,
+  ajouterUneCollection,
+  creerCollection,
 }

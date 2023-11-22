@@ -225,7 +225,7 @@ console.log(tableauObjectBDD);
 // Formater un Tableau d'object pour mettre la collection dans l'ordre
 for(let champ of tableauObjectBDD) {
     
-    console.log(champ);
+    //console.log(champ);
     let tableObject = {
         nom: champ.Nom,
         ref: champ.Référence,

@@ -325,3 +325,24 @@ body {
     border-top: 1px solid rgba(255, 255, 255, .3);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+.popUpLigne{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.popUpButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.popUpModify{
+    cursor: pointer;
+}
+.popUpSupp{
+    cursor: pointer;
+}
+.popUpClose{
+    cursor: pointer;
+}

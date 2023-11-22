@@ -1,4 +1,5 @@
 import{objetConstructeur} from "./fonctionsContruction.js"
+import{ajouterUneCollection} from "./fonctionsDeBDD.js"
 import{tableauObjectDeChamp, choixInput} from "./variablesGlobales.js";
 import{verifRegex} from "./ControleSaisieUsers.js"
 import{obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument} from "./fonctionsCRUDFirebase.js";
@@ -160,12 +161,15 @@ topBar.appendChild(divRecherche);
         let validButton = document.createElement("img");
         validButton.src = "./img/Cercle-valider.svg";
         validButton.className = "imagevalider";
+        validButton.id = "ajout_BDD";
         divInput.appendChild(validButton);
+        ajouterUneCollection();
 
         // Création écouteur événement bouton valider
         validButton.addEventListener("click", () => {
-            objetConstructeur();
-            
+            if (verifRegex()) {
+                objetConstructeur();
+            }
         })
     }
     
@@ -216,10 +220,11 @@ function suprimerContenaireListe(){
 creerContenaireListe()
 
 
-let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
-
+let tableauObjectBDD = await obtenirTouteLaCollection("Légume");
+console.log(tableauObjectBDD);
 // Formater un Tableau d'object pour mettre la collection dans l'ordre
 for(let champ of tableauObjectBDD) {
+    
     console.log(champ);
     let tableObject = {
         nom: champ.Nom,
@@ -237,7 +242,7 @@ for(let champ of tableauObjectBDD) {
 
     Object.keys(tableObject).forEach(element => {
        //console.log(champ[element])
-        if (tableObject[element] != undefined){
+        if (tableObject[element] != undefined && tableObject[element] != "on"){
         let divConteneur = document.createElement("div");
         divConteneur.classList.add("divConteneur");
         divConteneur.setAttribute("id", element);
@@ -247,11 +252,23 @@ for(let champ of tableauObjectBDD) {
     });
 
     conteneurList.appendChild(divChamp);
+
+    /*let supprimeButton = document.createElement("img");
+    supprimeButton.src = "./img/trash-can-regular.svg";
+    supprimeButton.className = "imagesupprimer";
+    supprimeButton.id = "supprime_BDD";
+    divChamp.appendChild(supprimeButton);
+
+    console.log(tableObject.cat, tableObject.ref)
+    let supprimerCollection = document.getElementById("supprime_BDD");
+    supprimerCollection.addEventListener("click", () => {
+        supprimerUnDocument(tableObject.cat, tableObject.ref);
+        divChamp.removeChild(divConteneur);
+        //objetDEConstructeur(tableauObjectDeChamp);
+        });*/
 }
 
-validButton.addEventListener("click", () => {
-    verifRegex()
-}) 
+
 
 //---------------------------------------------- EXPORT --------------------------------------------------------//
 

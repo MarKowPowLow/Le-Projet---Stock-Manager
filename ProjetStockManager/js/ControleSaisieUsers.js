@@ -8,14 +8,15 @@ let inputNom = document.getElementById("Nom")
 if (inputNom.value == "") {
 
     window.alert("Il manque des caractères non ?")
-    return;
+    return false;
 
 } else {
 
     const regexNom = new RegExp("^([A-Za-z0-9À-ÖÙ-öù-ÿ\\s])*$","g");
     if (regexNom.test(inputNom.value) === false) {
         window.alert("Vous avez entré des caractères incorrect (Pas de caractères spéciaux).")
-        return;}
+        return false;
+    }
     }
 
     // Référence
@@ -24,14 +25,14 @@ let inputRéférence = document.getElementById("Référence")
 if (inputRéférence.value == "") {
 
     window.alert("Il manque des caractères non ?")
-    return;
+    return false;
 
 } else {
 
     const regexReference = new RegExp("^([A-Z0-9])*$","g");
     if (regexReference.test(inputRéférence.value) === false) {
         window.alert("Vous avez entré des caractères incorrect (Lettres Majuscules/Chiffres seulement).")
-        return}
+        return false}
     }
 
 
@@ -41,14 +42,15 @@ let inputQuantité = document.getElementById("Quantité")
 if (inputQuantité.value == "") {
 
     window.alert("Il manque des caractères non ?")
-    return;
+    return false;
 
 } else {
 
     const regexQuantite = new RegExp("^([0-9])*$","g");
     if (regexQuantite.test(inputQuantité.value) === false) {
         window.alert("Vous avez entré des caractères incorrect (Chiffres seulement).")
-        return}
+        return false;
+    }
     }
 
 /*
@@ -104,6 +106,7 @@ if (inputsousCatégorie.value == "") {
 */
     //objetConstructeur();
 
+    return true;
 }
 
 

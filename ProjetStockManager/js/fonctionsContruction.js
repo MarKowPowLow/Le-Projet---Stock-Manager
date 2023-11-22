@@ -1,4 +1,4 @@
-import { tableauObjectDeChamp } from "./test.js"
+import { tableauObjectDeChamp } from "./variablesGlobales.js"
 import { creerCollection } from "./fonctionsDeBDD.js"
 import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
 let popUpTab;

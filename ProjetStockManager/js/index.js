@@ -1,4 +1,5 @@
-import{objetConstructeur} from "./fonctionsContruction.js"
+import{objetConstructeur, affichagePopUpModifObjet} from "./fonctionsContruction.js"
+import{ajouterUneCollection} from "./fonctionsDeBDD.js"
 import{tableauObjectDeChamp, choixInput} from "./variablesGlobales.js";
 import{verifRegex} from "./ControleSaisieUsers.js"
 import{obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument} from "./fonctionsCRUDFirebase.js";
@@ -122,7 +123,7 @@ document.body.appendChild(adminPopUp);
 
             let textCheckBox = document.createElement("p");
             textCheckBox.textContent = champ.nom;
-
+            //console.log(champ.check)
             if(champ.check !==undefined){
                 let checkBox = document.createElement("input");
                 checkBox.type = "checkbox"
@@ -246,8 +247,8 @@ creationDivIput()
 
 
 function toggleCheckBox (input) {
-    console.log(input)
-    console.log(tableauObjectDeChamp)
+    //console.log(input)
+   // console.log(tableauObjectDeChamp)
     for(let champ in tableauObjectDeChamp){
     if (tableauObjectDeChamp[champ].nom === input){
     tableauObjectDeChamp[champ].check = !tableauObjectDeChamp[champ].check
@@ -314,10 +315,14 @@ for(let champ of tableauObjectBDD) {
         divConteneur.setAttribute("id", element);
         divConteneur.textContent = tableObject[element];
         divChamp.appendChild(divConteneur);
+
         };
     });
 
     conteneurList.appendChild(divChamp);
+    divChamp.addEventListener("click",(e)=>{
+        affichagePopUpModifObjet(e)
+    })
 
     /*let supprimeButton = document.createElement("img");
     supprimeButton.src = "./img/trash-can-regular.svg";

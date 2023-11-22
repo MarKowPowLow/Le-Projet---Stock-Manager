@@ -99,7 +99,7 @@ for(let champ of tableauObjectBDD) {
     console.log(tableObject)
     let divChamp = document.createElement("div");
     divChamp.classList.add("divChamp");
-
+    
     Object.keys(tableObject).forEach(element => {
        //console.log(champ[element])
        if (tableObject[element] != undefined){
@@ -114,18 +114,19 @@ for(let champ of tableauObjectBDD) {
     conteneurList.appendChild(divChamp);
     //console.log(champ);
 
-    /* let supprimeButton = document.createElement("img");
+    /*let supprimeButton = document.createElement("img");
     supprimeButton.src = "./img/trash-can-regular.svg";
     supprimeButton.className = "imagesupprimer";
     supprimeButton.id = "supprime_BDD";
     divChamp.appendChild(supprimeButton);
 
-    let supprimerCollection = divChamp.getElementById("supprime_BDD");
+    console.log(tableObject.cat, tableObject.ref)
+    let supprimerCollection = document.getElementById("supprime_BDD");
     supprimerCollection.addEventListener("click", () => {
-        supprimerUnDocument(tableObject[cat], tableObject[ref]);
+        supprimerUnDocument(tableObject.cat, tableObject.ref);
         divChamp.removeChild(divConteneur);
         //objetDEConstructeur(tableauObjectDeChamp);
-        }); */
+        });*/
 };
 
 // Création écouteur événement bouton valider

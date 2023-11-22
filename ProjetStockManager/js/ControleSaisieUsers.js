@@ -102,7 +102,7 @@ if (inputsousCatégorie.value == "") {
         return}
     }
 */
-    objetConstructeur();
+    //objetConstructeur();
 
 }
 

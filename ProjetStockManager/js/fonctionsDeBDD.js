@@ -6,10 +6,8 @@ import { objetConstructeur } from "./fonctionsContruction.js"
 let ajouterCollection = document.getElementById("ajout_BDD");
 ajouterCollection.addEventListener("click", () => {
   let obj = creerCollection(tableauObjectDeChamp);
-  let dataBase = document.getElementById("Catégorie").value;
   console.log(obj)
-  ajouterUnObjetAvecIdSpécifique(obj, dataBase, obj.Référence);
-  objetConstructeur(tableauObjectDeChamp);
+  objetConstructeur(tableauObjectDeChamp); 
 });
 
 // Creer un objet en prenant les valeurs des champs de text
@@ -40,5 +38,6 @@ const creerCollection = (tableauObjectDeChamp) => {
 
 
 export {
+  creerCollection,
   ajouterCollection,
 }

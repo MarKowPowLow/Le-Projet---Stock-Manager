@@ -54,6 +54,36 @@ document.body.appendChild(adminPopUp);
         viderCollection.textContent = "Supprimer la collection";
         adminPopUpTopDiv.appendChild(viderCollection);
 
+        // Création div Zone saisie
+        let divZoneSaisie = document.createElement("div");
+        divZoneSaisie.classList.add("divzonesaisie");
+        adminPopUpTopDiv.appendChild(divZoneSaisie);
+
+            // Création zone saisie pour ajouter un catégorie
+            let ajouterCategorie = document.createElement("input");
+            ajouterCategorie.setAttribute("type", "text");
+            ajouterCategorie.setAttribute("placeholder", "Nouvelle catégorie");
+            divZoneSaisie.appendChild(ajouterCategorie);
+
+            // Création bouton OK zone saisie
+            let okButton = document.createElement("button");
+            okButton.textContent = "Ajouter";
+            divZoneSaisie.appendChild(okButton);
+
+                okButton.addEventListener("click", () => {
+                    if(ajouterCategorie.value == "") {
+                        alert("Veuillez rentrer une nouvelle catégorie")
+                    } 
+                    else {
+                        choixInput.push(ajouterCategorie.value);
+                        let _select =   document.getElementById("mySelect");
+                        let opt = document.createElement("option")
+                        opt.textContent = ajouterCategorie.value;
+                        _select.appendChild(opt)
+                        ajouterCategorie.value ="";
+                    }
+                })
+
         // Création bouton fermer la page
         let fermerPopUp = document.createElement("img");
         fermerPopUp.src ="./img/circle-xmark-regular.svg";
@@ -75,8 +105,7 @@ document.body.appendChild(adminPopUp);
 
     for (let i = 0; i < choixInput.length; i++) {
         let option = document.createElement("option");
-        option.setAttribute("value", choixInput[i]);
-        option.text = choixInput[i];
+        option.textContent = choixInput[i];
         choixCollection.appendChild(option);
     }
 
@@ -94,7 +123,7 @@ document.body.appendChild(adminPopUp);
 
             let textCheckBox = document.createElement("p");
             textCheckBox.textContent = champ.nom;
-            console.log(champ.check)
+
             if(champ.check !==undefined){
                 let checkBox = document.createElement("input");
                 checkBox.type = "checkbox"
@@ -147,15 +176,53 @@ topBar.appendChild(divRecherche);
 
         // Création des Input
         for(let champ of tableauObjectDeChamp) {
-            if(champ.check!==false) {
+            if(champ.check!==false ) {
 
                 let inputProduit = document.createElement("input");
                 inputProduit.setAttribute("type", champ.type);
                 inputProduit.setAttribute("placeholder", champ.nom);
                 inputProduit.setAttribute("id", champ.nom)
                 divInput.appendChild(inputProduit);
+                
+
             }
+         
         }
+
+        /*
+                for(let champ of tableauObjectDeChamp) {
+            let inputProduit = null;
+            if(champ.check!==false ) {
+
+
+                if(champ.nom ==="Catégorie"){
+                    inputProduit = document.createElement("select");
+
+                    for(let opt of choixInput){
+
+                        let option = document.createElement("option")
+                        option.textContent = opt
+                        inputProduit.appendChild(option)
+                    }
+
+
+                }else{
+                    inputProduit = document.createElement("input");
+                    inputProduit.setAttribute("type", champ.type);
+                    inputProduit.setAttribute("placeholder", champ.nom);
+               
+                  
+    
+
+                }
+                inputProduit.setAttribute("id", champ.nom)
+                divInput.appendChild(inputProduit);
+            }
+         
+        }
+        
+        
+        */
 
         // Création bouton valider
         let validButton = document.createElement("img");

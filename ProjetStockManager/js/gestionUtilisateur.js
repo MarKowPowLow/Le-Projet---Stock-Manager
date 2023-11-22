@@ -26,16 +26,20 @@ gererCategories.classList.add("topbutton");
 topBar.appendChild(gererCategories);
 
 
-let recherche = document.createElement("input");
-recherche.setAttribute("type", "search");
-recherche.id = "recherche";
-topBar.appendChild(recherche);
+let divRecherche = document.createElement("div");
+topBar.appendChild(divRecherche);
+
+    let recherche = document.createElement("input");
+    recherche.setAttribute("type", "search");
+    recherche.id = "recherche";
+    divRecherche.appendChild(recherche);
 
 
-let submit = document.createElement("input");
-submit.setAttribute("type", "submit");
-submit.id = "submit";
-topBar.appendChild(submit);
+    let submit = document.createElement("input");
+    submit.setAttribute("type", "submit");
+    submit.id = "submit";
+    divRecherche.appendChild(submit);
+
 
 
 

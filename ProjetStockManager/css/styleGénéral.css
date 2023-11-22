@@ -1,35 +1,32 @@
 * {
+    
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 body {
+
     display: flex;
     flex-direction: column;
+    padding: 20px;
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(120deg, #FF8A00 0%, #fda085 100%);
+    background-image: linear-gradient(120deg, #FF8A00 0%, #FDA085 100%);
 }
-
 
 /* CSS Top Button */
 
-
 .topbar {
-    margin-top: 20px;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    margin-left: 20px;
-    margin-right: 20px;
-   
 }
 
-
 .topbutton{
+
     border: 2px solid white;
     border-radius: 50px;
     padding: 15px;
@@ -39,21 +36,24 @@ body {
     background-color: #FF8A00;
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 4px 4px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 1px 4px 0px #B15F00;
 }
 
+.topbutton:active{
+
+    transform: translateY(2px);
+    box-shadow: 0px 2px 0px #B15F00;
+}
 
 #recherche, #submit {
+
     height: 30px;
 }
 
-
-
-
 /* CSS Div Inputs */
 
-
 .divinput {
+
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -64,29 +64,25 @@ body {
     border-radius: 20px;
     opacity: 50%;
     box-shadow: 1px 8px 2px rgba(0,0,0,0.8), 0 6px 2px rgba(0,0,0,0.23);
-    margin-left: 20px;
-    margin-right: 20px;
-   
 }
 
-
 .divinput input {
+
     height: 30px;
     text-align: center;
     font-size: 15px;
 }
 
-
 .imagevalider, .imagesupprimer {
+
     height: 50px;
     cursor: pointer;
 }
 
-
 /* CSS Conteneur liste */
 
-
 .conteneurliste {
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -98,13 +94,10 @@ body {
     border-radius: 20px;
     min-height: 100px;
     overflow-y: scroll;
-    margin-left: 20px;
-    margin-right: 20px;
-    gap: 5px
-   
 }
 
 .divChamp {
+
     width: 100%;
     height: 50px;
     border: 2px black solid;
@@ -116,14 +109,16 @@ body {
 }
 
 .divConteneur {
+
     display: flex;
     align-items: center;
 
 }
 
-
 /* CSS objet conteneur liste */
- .listeobjet {
+
+.listeobjet {
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -134,7 +129,8 @@ body {
     background-color: #EFD299;
     border-radius: 20px;
     box-shadow: 1px 8px 2px rgba(0,0,0,0.8), 0 6px 2px rgba(0,0,0,0.23);
- }
+}
+
 .flou {
  
     height: 100%;
@@ -146,7 +142,9 @@ body {
     justify-content: center;
     backdrop-filter: blur(2px);
 }
+
 #popUpModifObjet{
+
     display: flex;
     flex-direction: column;
     height: 300px;
@@ -160,7 +158,9 @@ body {
     color : #6a3902;
     
 }
+
 .popUpTab{
+
     display : flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -168,7 +168,9 @@ body {
     text-align: center;
     
 }
+
 .popUpButton{
+
     padding-top: 25px;
     display : flex;
     flex-direction: row;
@@ -177,6 +179,7 @@ body {
 
 }
 .popUpModify, .popUpSupp, .popUpClose{
+
     width : 70px;
     height : 25px;
     background-color: #FF8A00;
@@ -184,6 +187,138 @@ body {
     border-radius: 5px;
 }
 .popUpInput{
+
     background-color:#e1e1e1;
     color: #e1e1e1;
+}
+
+/****************************************************** ADMIN POP UP *************************************************************/
+
+.glass{
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+    background: #FF8A00;
+    opacity: 0.2;
+    z-index: 90;
+}
+
+.adminpopuphidden {
+
+    height: 300px;
+    width: 700px;
+    padding: 10px;
+    position: absolute;
+    display: flex;
+    display: none;
+    flex-direction: column;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .3);
+    backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, .2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+    visibility: hidden;
+}
+
+.adminpopupvisible {
+
+    height: 300px;
+    width: 700px;
+    padding: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .3);
+    backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, .2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+    visibility: visible;
+}
+
+.adminpopuptopdiv {
+
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.vidercollectionbouton {
+
+    padding: 15px 0;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 1px 4px 0px #B15F00;
+    background-color: #FF8A00;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vidercollectionbouton:active{
+
+    transform: translateY(2px);
+    box-shadow: 0px 2px 0px #B15F00;
+}
+
+.inputadminpopup {
+
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+.adminpopupdivcheckbox {
+
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    justify-content: space-evenly;
+    background-color: rgba(255, 138, 0, .8);
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, .3);
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.divcheckbox {
+
+    background: #FF8A00;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }

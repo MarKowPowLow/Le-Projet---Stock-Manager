@@ -42,7 +42,8 @@ async function objetConstructeur() {
     
 
     let objet = await ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
-    console.log(typeof(obj.id))
+    //console.log(typeof(obj.id));
+    console.log(obj);
 
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")

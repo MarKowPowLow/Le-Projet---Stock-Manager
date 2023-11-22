@@ -16,10 +16,12 @@ const ajouterUneCollection = () => {
 const creerCollection = (tableauObjectDeChamp) => {
   let objet = {};
   for (let obj of tableauObjectDeChamp) {
-    if(document.getElementById(obj.nom)) {
+    console.log(document.getElementById(obj.nom).value)
+    if(document.getElementById(obj.nom) && document.getElementById(obj.nom).value != "on") {
       objet[obj.nom] = document.getElementById(obj.nom).value;
     }
   }
+  //console.log(objet)
   return objet;
 };
 

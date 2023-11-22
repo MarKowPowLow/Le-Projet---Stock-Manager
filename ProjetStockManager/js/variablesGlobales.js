@@ -8,7 +8,7 @@ let tableauObjectDeChamp = [
     {nom:"SousCatégorie", type:"text", check:false},
     {nom:"Unité", type:"text", check:false}
 ];
-console.log(tableauObjectDeChamp);
+//console.log(tableauObjectDeChamp);
 
 let choixInput = ["Fruits", "Légumes", "Fromages", "Yaourts"];
 

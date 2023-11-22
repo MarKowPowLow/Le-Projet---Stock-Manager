@@ -1,22 +1,12 @@
 import { ajouterUnObjetAvecIdSpécifique  } from "./fonctionsCRUDFirebase.js";
 import { tableauObjectDeChamp } from "./variablesGlobales.js";
-import { objetConstructeur } from "./fonctionsContruction.js"
-
-// Function pour le bouton "croix-valider" qui declenche les fonctions base sur les inputs.
-
-const ajouterUneCollection = () => {
-  let ajouterCollection = document.getElementById("ajout_BDD");
-  ajouterCollection.addEventListener("click", () => {
-    objetConstructeur(tableauObjectDeChamp); 
-  });
-}
-
+import { objetConstructeur } from "./fonctionsContruction.js";
 
 // Creer un objet en prenant les valeurs des champs de text
 const creerCollection = (tableauObjectDeChamp) => {
   let objet = {};
   for (let obj of tableauObjectDeChamp) {
-    console.log(document.getElementById(obj.nom).value)
+    //console.log(document.getElementById(obj.nom).value)
     if(document.getElementById(obj.nom) && document.getElementById(obj.nom).value != "on") {
       objet[obj.nom] = document.getElementById(obj.nom).value;
     }
@@ -42,6 +32,5 @@ const creerCollection = (tableauObjectDeChamp) => {
 
 
 export {
-  ajouterUneCollection,
   creerCollection,
 }

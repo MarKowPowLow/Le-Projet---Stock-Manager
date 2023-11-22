@@ -1,5 +1,4 @@
 import{objetConstructeur} from "./fonctionsContruction.js"
-import{ajouterUneCollection} from "./fonctionsDeBDD.js"
 import{tableauObjectDeChamp, choixInput} from "./variablesGlobales.js";
 import{verifRegex} from "./ControleSaisieUsers.js"
 import{obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument} from "./fonctionsCRUDFirebase.js";
@@ -163,12 +162,12 @@ topBar.appendChild(divRecherche);
         validButton.className = "imagevalider";
         validButton.id = "ajout_BDD";
         divInput.appendChild(validButton);
-        ajouterUneCollection();
+        
 
-        // Création écouteur événement bouton valider
+        // Création écouteur événement bouton valider. Déclenche la Function pour ajouter la base de donnée.
         validButton.addEventListener("click", () => {
             if (verifRegex()) {
-                objetConstructeur();
+                objetConstructeur(tableauObjectDeChamp);
             }
         })
     }
@@ -221,7 +220,7 @@ creerContenaireListe()
 
 
 let tableauObjectBDD = await obtenirTouteLaCollection("Légume");
-console.log(tableauObjectBDD);
+//console.log(tableauObjectBDD);
 // Formater un Tableau d'object pour mettre la collection dans l'ordre
 for(let champ of tableauObjectBDD) {
     
@@ -236,7 +235,7 @@ for(let champ of tableauObjectBDD) {
         sCat: champ.SousCatégorie,
         unite: champ.Unite,
         };
-    console.log(tableObject)
+    //console.log(tableObject)
     let divChamp = document.createElement("div");
     divChamp.classList.add("divChamp");
 

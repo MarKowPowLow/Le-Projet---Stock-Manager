@@ -1,4 +1,4 @@
-import { ajouterUnObjet  } from "./fonctionsCRUDFirebase.js";
+import { ajouterUnObjetAvecIdSpécifique  } from "./fonctionsCRUDFirebase.js";
 import { tableauObjectDeChamp } from "./test.js";
 import { objetConstructeur } from "./fonctionsContruction.js"
 
@@ -7,10 +7,9 @@ let ajouterCollection = document.getElementById("ajout_BDD");
 ajouterCollection.addEventListener("click", () => {
   let obj = creerCollection(tableauObjectDeChamp);
   let dataBase = document.getElementById("Catégorie").value;
-
-  ajouterUnObjet(obj, dataBase);
-  objetConstructeur(tableauObjectDeChamp)
-  //viderChampText(tableauObjectDeChamp);   
+  console.log(obj)
+  ajouterUnObjetAvecIdSpécifique(obj, dataBase, obj.Référence);
+  objetConstructeur(tableauObjectDeChamp);
 });
 
 // Creer un objet en prenant les valeurs des champs de text
@@ -24,17 +23,22 @@ const creerCollection = (tableauObjectDeChamp) => {
   return objet;
 };
 
-// Vide les champs de text
-const viderChampText = (tableauDeChamps) => {
-  for (let obj of tableauDeChamps) {
-    let _input = document.createElement("input");
-    _input.value = "";
-    if (obj.type === "number") {
-      _input.value = 0;
+
+
+// Prototype: Function pour obtenir les "Categories" pour appeler la base de donnée.
+/* const telechargerCollection = (tableauObjectDeChamp) =>{
+  let categorieName = "";
+  for (let obj of tableauObjectDeChamp) {
+    if(document.getElementById(obj.Categorie)){
+      categorieName[obj.Categorie] = obj.Categorie.value;
     }
+    console.log(categorieName);
+    return categorieName;
   }
-};
+  let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
+}*/
+
 
 export {
-    ajouterCollection,
+  ajouterCollection,
 }

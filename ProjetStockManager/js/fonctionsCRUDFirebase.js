@@ -241,7 +241,7 @@ const deleteCollection = async (collectionPath) => {
 const RécupérerObjet = async (database, objectId) => {
   let retour;
   const collection = await obtenirTouteLaCollection(database)
-  console.log(collection)
+  //console.log(collection)
   collection.forEach(element => { 
     if (element.id == objectId) {
       retour = element

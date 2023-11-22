@@ -1,12 +1,12 @@
 import { tableauObjectDeChamp } from "./variablesGlobales.js"
 import { creerCollection } from "./fonctionsDeBDD.js"
-import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
+import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière,supprimerUnDocument } from "./fonctionsCRUDFirebase.js"
 let popUpTab;
 let popUpModifObjet
 let popUpButton
 let popUpClose
 let popUpInput
-let popUpLine
+let popUpLigne
 let popUpModify
 let popUpPropriete
 let popUpSupp
@@ -76,12 +76,17 @@ function ajoutBackgroundFlou() {
 function affichagePopUpModifObjet(e) {
     let target = e.target;
     ajoutBackgroundFlou()
-    popUpModifObjet = document.createElement('div');
-    popUpModifObjet.id = 'popUpModifObjet'
+
+    if(!document.getElementById("popUpModifObjet")){
+        popUpModifObjet = document.createElement('div');
+        popUpModifObjet.id = 'popUpModifObjet'
+        
+    }
+
 
 
     flou.appendChild(popUpModifObjet)
-    interaction(target)
+    interaction (target)
     //trouverDocumentsAvecValeur()
 
 
@@ -118,38 +123,77 @@ function creerUneLigne(){
 // ###### Pop up tableau #########
 
 async function interaction(target){
-    popUpTab =creerUnElement("popUpTab","div", popUpModifObjet)
-
-
-//Apparition des lignes en fonction du tableau "tableauObjectDeChamp"
-
-    //recuprération de l'objet en fonction du nom de la ligne
-let objet  = await RécupérerObjet (target.children[3].textContent, target.id);
-console.log(objet)
-let tabObjet =[]
-for(let valeur in objet){
-    tabObjet.push(valeur)
+    let objet  = await RécupérerObjet (target.children[3].textContent, target.id);  //récupération de l'objet
+    for(let temp in tableauObjectDeChamp){  //On utilise un boucle pour le contenus du pop-Up
+        let parram = (tableauObjectDeChamp[temp].nom);  //Création d'une variable contenant la propriété en cours
+        popUpLigne = document.createElement('div'); //Création de la ligne
+        popUpLigne.classList.add('popUpLigne'); //Attibution de la classe à la ligne
+        popUpPropriete = document.createElement('div'); //Création de champ propriété
+        popUpPropriete.classList.add('popUpPropriete'); //Attibution de la classe au champ propiété
+        popUpPropriete.textContent = parram;    //Insserssion du nom de la propriété dans la 'div' proprité
+        popUpInput = document.createElement('input');   //création de l'input
+        popUpInput.classList.add('popUpInput'); //Attibution de la classe à l'input
+        switch(parram){ //création du placeHolder en fonction de la propiété traité dans la boucle
+            case 'Nom' : popUpInput.placeholder = objet.Nom
+            break;
+            case 'Référence' : popUpInput.placeholder = objet.Référence
+            break;
+            case 'Quantité' : popUpInput.placeholder = objet.Quantité
+            break;
+            case 'Catégorie' : popUpInput.placeholder = objet.Catégorie
+            break;
+            case 'prix' : popUpInput.placeholder = objet.prix
+            break;
+            case 'date' : popUpInput.placeholder = objet.date
+            break;
+            case 'sousCatégorie' : popUpInput.placeholder = objet.sousCatégorie
+            break;
+            case 'Unité' : popUpInput.placeholder = objet.Unité
+            break;
+        }
+        popUpLigne.appendChild(popUpPropriete)  //inssertion du nom de la propriété dans la ligne
+        popUpLigne.appendChild(popUpInput)  //inssertion de l'input dans la ligne 
+        popUpModifObjet.appendChild(popUpLigne) //inssertion de la ligne dans le pop up
+    }
+    // création du contener des boutons et des différents boutons
+    popUpButton = document.createElement('div')
+    popUpModify = document.createElement('div')
+    popUpSupp = document.createElement('div')
+    popUpClose = document.createElement('div')
+    //Attribution des classes au différentes div
+    popUpButton.classList.add('popUpButton')
+    popUpModify.classList.add('popUpModify')
+    popUpSupp.classList.add('popUpSupp')
+    popUpClose.classList.add('popUpClose')
+    //Ajout d'un text Content au boutons////////////////(A REMPLACER PAR DES ICONES)
+    popUpModify.textContent = "Valid"
+    popUpSupp.textContent = "Supp"
+    popUpClose.textContent = "close"
+    //Création des listeners sur les boutons
+    popUpModify.addEventListener("click",()=>{
+        for(let i in objet){
+            console.log(`${objet[i].value}`)
+        }
+    })
+    popUpSupp.addEventListener("click",()=>{
+        supprimerUnDocument(objet.Catégorie, objet.id)
+        target.remove()
+        closePopUp()
+    })
+    popUpClose.addEventListener("click",()=>{
+        closePopUp ()
+    })
+    //Implémentation des boutons dans le popUp
+    popUpModifObjet.appendChild(popUpButton)
+    popUpButton.appendChild(popUpModify)
+    popUpButton.appendChild(popUpSupp)
+    popUpButton.appendChild(popUpClose)
 }
-console.log(tabObjet)
-for(let element in tableauObjectDeChamp){
-    creerUneLigne();
-    popUpPropriete.textContent = tableauObjectDeChamp[element].nom;
-    popUpInput.placeholder = objet[element]
-}
-//commentaire
-// ###### pop up button ##########
-popUpButton =creerUnElement("popUpButton","div", popUpModifObjet)
-
-
-    //##### pop up Modify #####
-    popUpModify= creerUnElement("popUpModify","button", popUpButton)
-    popUpModify.textContent = "Modifier"
-    //##### pop up Supp ######
-    popUpSupp =creerUnElement("popUpSupp", "button",popUpButton)
-    popUpSupp.textContent = "Supprimer"
-    //###### pop up Close ######
-    popUpClose =creerUnElement("popUpClose", "button", popUpButton)
-    popUpClose.textContent = "Annuler"
+function closePopUp (){
+   while(flou.firstChild){
+    flou.removeChild(flou.firstChild)
+   }
+    flou.remove()
 }
 
 // ###### pop up #########

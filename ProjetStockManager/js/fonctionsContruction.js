@@ -1,4 +1,4 @@
-import { tableauObjectDeChamp } from "./test.js"
+import { tableauObjectDeChamp } from "./variablesGlobales.js"
 //constructeur container principal
 
 const constructeurContainerPrincipal = (text) => {
@@ -26,16 +26,18 @@ function objetConstructeur() {
             temp.value=""
         }
     }
-    //console.log(obj)
+    console.log(obj)
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")
     conteneurliste.appendChild(parentLigne)
     for (let temp in obj){
+        if (obj[temp] != undefined && obj[temp] != "on" && obj[temp] != "") {
+            let enfantLigne = document.createElement("div")
+            enfantLigne.textContent=obj[temp]
+            parentLigne.appendChild(enfantLigne)
+            console.log(obj[temp])
+        }
         
-        let enfantLigne = document.createElement("div")
-        enfantLigne.textContent=obj[temp]
-        parentLigne.appendChild(enfantLigne)
-        //console.log(obj[temp])
 
     }
 }

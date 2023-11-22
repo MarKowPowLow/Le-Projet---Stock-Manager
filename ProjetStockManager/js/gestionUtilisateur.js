@@ -19,24 +19,24 @@ topBar.appendChild(accueil);
         document.location.href='index.html';
     })
 
-
-let gererCategories = document.createElement("div");
-gererCategories.textContent = "Gérer les catégories";
-gererCategories.classList.add("topbutton");
-topBar.appendChild(gererCategories);
+let h1 = document.createElement("h1");
+h1.textContent = "Gestion Utilisateurs";
+topBar.appendChild(h1);
 
 
-let recherche = document.createElement("input");
-recherche.setAttribute("type", "search");
-recherche.id = "recherche";
-topBar.appendChild(recherche);
+let divRecherche = document.createElement("div");
+topBar.appendChild(divRecherche);
+
+    let recherche = document.createElement("input");
+    recherche.setAttribute("type", "search");
+    recherche.id = "recherche";
+    divRecherche.appendChild(recherche);
 
 
-let submit = document.createElement("input");
-submit.setAttribute("type", "submit");
-submit.id = "submit";
-topBar.appendChild(submit);
-
+    let submit = document.createElement("input");
+    submit.setAttribute("type", "submit");
+    submit.id = "submit";
+    divRecherche.appendChild(submit);
 
 
 

@@ -122,8 +122,8 @@ function creerUneLigne(){
 
 // ###### Pop up tableau #########
 
-async function interaction(target){
-    let objet  = await RécupérerObjet (target.children[3].textContent, target.id);  //récupération de l'objet
+function interaction(target){
+    let objet  = RécupérerObjet (target.children[3].textContent, target.id);  //récupération de l'objet
     for(let temp in tableauObjectDeChamp){  //On utilise un boucle pour le contenus du pop-Up
         let parram = (tableauObjectDeChamp[temp].nom);  //Création d'une variable contenant la propriété en cours
         popUpLigne = document.createElement('div'); //Création de la ligne

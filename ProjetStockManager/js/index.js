@@ -220,7 +220,7 @@ function suprimerContenaireListe(){
 creerContenaireListe()
 
 
-let tableauObjectBDD = await obtenirTouteLaCollection("Légume");
+let tableauObjectBDD = await obtenirTouteLaCollection("Fruits");
 console.log(tableauObjectBDD);
 // Formater un Tableau d'object pour mettre la collection dans l'ordre
 for(let champ of tableauObjectBDD) {

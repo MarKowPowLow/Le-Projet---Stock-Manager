@@ -1,6 +1,6 @@
 import { tableauObjectDeChamp } from "./variablesGlobales.js"
 import { creerCollection } from "./fonctionsDeBDD.js"
-import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière,supprimerUnDocument } from "./fonctionsCRUDFirebase.js"
+import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière,supprimerUnDocument, mettreAJourUnDocument } from "./fonctionsCRUDFirebase.js"
 let popUpTab;
 let popUpModifObjet
 let popUpButton
@@ -57,11 +57,11 @@ async function objetConstructeur() {
 
     //création des éléments correspondants aux propriétés et aux valeurs associés des inputs
     for (let temp in obj) {
-
-        let enfantLigne = document.createElement("div")
-        enfantLigne.textContent = obj[temp]
-        parentLigne.appendChild(enfantLigne)
-
+        console.log(temp)
+        if(temp !== 'id'){
+            let enfantLigne = document.createElement("div")
+            enfantLigne.textContent = obj[temp]
+            parentLigne.appendChild(enfantLigne)}
     }
 }
 
@@ -69,6 +69,9 @@ async function objetConstructeur() {
 function ajoutBackgroundFlou() {
 
     flou.className = "flou"
+    flou.addEventListener('click',()=>{
+        closePopUp()
+    })
     document.body.appendChild(flou)
 
 }
@@ -85,7 +88,7 @@ function affichagePopUpModifObjet(e) {
 
 
 
-    flou.appendChild(popUpModifObjet)
+    document.body.appendChild(popUpModifObjet)
     interaction (target)
     //trouverDocumentsAvecValeur()
 
@@ -111,7 +114,7 @@ function creerUnElement( classe, typeElement, elementParent){
 }
 function creerUneLigne(){
                 // ##### pop up line #####
-                popUpLine = creerUnElement( "popUpLine","div", popUpTab)
+                let popUpLine = creerUnElement( "popUpLine","div", popUpTab)
 
                 //#### pop up propriété ##### 
                 popUpPropriete= creerUnElement("popUpPropriete","div",popUpLine)
@@ -133,8 +136,9 @@ async function interaction(target){
         popUpPropriete.textContent = parram;    //Insserssion du nom de la propriété dans la 'div' proprité
         popUpInput = document.createElement('input');   //création de l'input
         popUpInput.classList.add('popUpInput'); //Attibution de la classe à l'input
+        popUpInput.id = `popUp${tableauObjectDeChamp[temp].nom}` //
         switch(parram){ //création du placeHolder en fonction de la propiété traité dans la boucle
-            case 'Nom' : popUpInput.placeholder = objet.Nom
+            case 'Nom' : popUpInput.placeholder = objet.Nom;
             break;
             case 'Référence' : popUpInput.placeholder = objet.Référence
             break;
@@ -170,10 +174,73 @@ async function interaction(target){
     popUpSupp.textContent = "Supp"
     popUpClose.textContent = "close"
     //Création des listeners sur les boutons
-    popUpModify.addEventListener("click",()=>{
-        for(let i in objet){
-            console.log(`${objet[i].value}`)
+    popUpModify.addEventListener("click",async ()=>{
+        for(let i in tableauObjectDeChamp){
+            let input
+            let parram = `popUp${tableauObjectDeChamp[i].nom}`
+            //console.log(parram)
+            switch(parram){ //création du placeHolder en fonction de la propiété traité dans la boucle
+                case 'popUpNom' :
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Nom = input.value;
+                    target.children[i].textContent = input.value
+
+                }
+                break;
+                case 'popUpRéférence' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Référence = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpQuantité' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Quantité = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpCatégorie' :
+                    input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Catégorie = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpPrix' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.prix = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpDate' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.date = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpSousCatégorie' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.sousCatégorie = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpUnité' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Unité = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+            }
         }
+        mettreAJourUnDocument(objet.Catégorie, objet.id, objet)
+        closePopUp()
     })
     popUpSupp.addEventListener("click",()=>{
         supprimerUnDocument(objet.Catégorie, objet.id)
@@ -194,6 +261,7 @@ function closePopUp (){
     flou.removeChild(flou.firstChild)
    }
     flou.remove()
+    popUpModifObjet.remove()
 }
 
 // ###### pop up #########

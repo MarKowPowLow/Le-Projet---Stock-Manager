@@ -13,4 +13,4 @@ let tableauObjectDeChamp = [
 let choixInput = ["Fruits", "Légumes", "Fromages", "Yaourts"];
 
 
-export {tableauObjectDeChamp ,choixInput}
+export {tableauObjectDeChamp, choixInput}

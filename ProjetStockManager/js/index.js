@@ -1,4 +1,5 @@
-import{objetConstructeur} from "./fonctionsContruction.js"
+import{objetConstructeur, affichagePopUpModifObjet} from "./fonctionsContruction.js"
+import{creerCollection} from "./fonctionsDeBDD.js"
 import{tableauObjectDeChamp, choixInput} from "./variablesGlobales.js";
 import{verifRegex} from "./ControleSaisieUsers.js"
 import{obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument} from "./fonctionsCRUDFirebase.js";
@@ -122,7 +123,7 @@ document.body.appendChild(adminPopUp);
 
             let textCheckBox = document.createElement("p");
             textCheckBox.textContent = champ.nom;
-
+            //console.log(champ.check)
             if(champ.check !==undefined){
                 let checkBox = document.createElement("input");
                 checkBox.type = "checkbox"
@@ -246,8 +247,8 @@ creationDivIput()
 
 
 function toggleCheckBox (input) {
-    console.log(input)
-    console.log(tableauObjectDeChamp)
+    //console.log(input)
+   // console.log(tableauObjectDeChamp)
     for(let champ in tableauObjectDeChamp){
     if (tableauObjectDeChamp[champ].nom === input){
     tableauObjectDeChamp[champ].check = !tableauObjectDeChamp[champ].check
@@ -316,6 +317,37 @@ function importCollection(tableauObjectBDD) {
             };
         });
     
+    //console.log(champ);
+    let tableObject = {
+        nom: champ.Nom,
+        ref: champ.Référence,
+        qte: champ.Quantité,
+        cat: champ.Catégorie,
+        prix: champ.Prix,
+        date: champ.Date,
+        sCat: champ.SousCatégorie,
+        unite: champ.Unite,
+        };
+    //console.log(tableObject)
+    let divChamp = document.createElement("div");
+    divChamp.classList.add("divChamp");
+
+    Object.keys(tableObject).forEach(element => {
+       //console.log(champ[element])
+        if (tableObject[element] != undefined && tableObject[element] != "on"){
+        let divConteneur = document.createElement("div");
+        divConteneur.classList.add("divConteneur");
+        divConteneur.setAttribute("id", element);
+        divConteneur.textContent = tableObject[element];
+        divChamp.appendChild(divConteneur);
+
+        };
+    });
+
+    conteneurList.appendChild(divChamp);
+    divChamp.addEventListener("click",(e)=>{
+        affichagePopUpModifObjet(e)
+    })
         conteneurList.appendChild(divChamp);
     }
 }

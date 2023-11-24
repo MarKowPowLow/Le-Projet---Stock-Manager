@@ -1,4 +1,5 @@
 import{objetConstructeur, affichagePopUpModifObjet} from "./fonctionsContruction.js"
+import { creationEtAjoutUser } from "./fonctionsDeGestion.js"
 
 
 // Création conteneur Top Bar
@@ -61,10 +62,29 @@ document.body.appendChild(divInput);
     inputPrenom.setAttribute("placeholder", "Prénom");
     divInput.appendChild(inputPrenom);
 
+    let inputPassword = document.createElement("input");
+    inputPassword.setAttribute("type", "text");
+    inputPassword.setAttribute("placeholder", "Mot de passe");
+    divInput.appendChild(inputPassword);
+
+    
     let inputEmail = document.createElement("input");
     inputEmail.setAttribute("type", "email");
     inputEmail.setAttribute("placeholder", "Email");
     divInput.appendChild(inputEmail);
+
+    let tableauRoles = ["Utilisateur","Utilisateur avec priviléges","Administrateur"]
+
+    let selectRole = document.createElement("select");
+    selectRole.setAttribute("name", "role");
+    divInput.appendChild(selectRole);
+
+    tableauRoles.forEach(roles => {
+        let option = document.createElement("option")
+        option.value = roles
+        option.text = roles
+        selectRole.appendChild(option)
+    })
 
     let validButton = document.createElement("img");
     validButton.src = "./img/Cercle-valider.svg";
@@ -95,15 +115,25 @@ document.body.appendChild(conteneurList);
         let objetPrenom = document.createElement("div");
         objetPrenom.textContent = inputPrenom.value;
         listeobjet.appendChild(objetPrenom);
+
+        let objetPassword = document.createElement("div");
+        objetPassword.textContent = inputPassword.value;
+        listeobjet.appendChild(objetPassword);
         
         let objetEmail = document.createElement("div");
         objetEmail.textContent = inputEmail.value;
         listeobjet.appendChild(objetEmail);
+
+        let objetRole = document.createElement("div");
+        objetRole.textContent = selectRole.value;
+        listeobjet.appendChild(objetRole);
         
         let deleteButtonConteneurListe = document.createElement("img");
         deleteButtonConteneurListe.src ="./img/circle-xmark-regular.svg";
         deleteButtonConteneurListe.className = "imagesupprimer";
         listeobjet.appendChild(deleteButtonConteneurListe);
+
+        creationEtAjoutUser("users",inputEmail.value,inputPassword.value,selectRole.value)
 
         deleteButtonConteneurListe.addEventListener("click", () => {
             deleteButtonConteneurListe.parentNode.remove()

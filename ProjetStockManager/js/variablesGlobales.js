@@ -17,4 +17,4 @@ let choixInput = Object.values(choixCat[0]);
 console.log(choixCat[0]);
 console.log(choixInput);
 
-export {tableauObjectDeChamp ,choixInput}
+export {tableauObjectDeChamp, choixInput}

@@ -219,53 +219,49 @@ function suprimerContenaireListe(){
 creerContenaireListe()
 
 
-let tableauObjectBDD = await obtenirTouteLaCollection("Légume");
 //console.log(tableauObjectBDD);
-// Formater un Tableau d'object pour mettre la collection dans l'ordre
-for(let champ of tableauObjectBDD) {
+function importCollection(tableauObjectBDD) {
+    for(let champ of tableauObjectBDD) {
     
-    //console.log(champ);
-    let tableObject = {
-        nom: champ.Nom,
-        ref: champ.Référence,
-        qte: champ.Quantité,
-        cat: champ.Catégorie,
-        prix: champ.Prix,
-        date: champ.Date,
-        sCat: champ.SousCatégorie,
-        unite: champ.Unite,
-        };
-    //console.log(tableObject)
-    let divChamp = document.createElement("div");
-    divChamp.classList.add("divChamp");
-
-    Object.keys(tableObject).forEach(element => {
-       //console.log(champ[element])
-        if (tableObject[element] != undefined && tableObject[element] != "on"){
-        let divConteneur = document.createElement("div");
-        divConteneur.classList.add("divConteneur");
-        divConteneur.setAttribute("id", element);
-        divConteneur.textContent = tableObject[element];
-        divChamp.appendChild(divConteneur);
-        };
-    });
-
-    conteneurList.appendChild(divChamp);
-
-    /*let supprimeButton = document.createElement("img");
-    supprimeButton.src = "./img/trash-can-regular.svg";
-    supprimeButton.className = "imagesupprimer";
-    supprimeButton.id = "supprime_BDD";
-    divChamp.appendChild(supprimeButton);
-
-    console.log(tableObject.cat, tableObject.ref)
-    let supprimerCollection = document.getElementById("supprime_BDD");
-    supprimerCollection.addEventListener("click", () => {
-        supprimerUnDocument(tableObject.cat, tableObject.ref);
-        divChamp.removeChild(divConteneur);
-        //objetDEConstructeur(tableauObjectDeChamp);
-        });*/
+        //console.log(champ);
+        let tableObject = {
+            nom: champ.Nom,
+            ref: champ.Référence,
+            qte: champ.Quantité,
+            cat: champ.Catégorie,
+            prix: champ.Prix,
+            date: champ.Date,
+            sCat: champ.SousCatégorie,
+            unite: champ.Unite,
+            };
+        //console.log(tableObject)
+        let divChamp = document.createElement("div");
+        divChamp.classList.add("divChamp");
+    
+        Object.keys(tableObject).forEach(element => {
+           //console.log(champ[element])
+            if (tableObject[element] != undefined && tableObject[element] != "on"){
+            let divConteneur = document.createElement("div");
+            divConteneur.classList.add("divConteneur");
+            divConteneur.setAttribute("id", element);
+            divConteneur.textContent = tableObject[element];
+            divChamp.appendChild(divConteneur);
+            };
+        });
+    
+        conteneurList.appendChild(divChamp);
+    }
 }
+// Lance en boucle la fonction importCollection pour chaque Cétégorie.
+for (let id of choixInput) {
+    //console.log(id);
+    let tableauObjectBDD = await obtenirTouteLaCollection(id);
+    importCollection(tableauObjectBDD);
+}
+
+
+// Formater un Tableau d'object pour mettre la collection dans l'ordre
+
 
 
 

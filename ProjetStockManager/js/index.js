@@ -51,8 +51,13 @@ document.body.appendChild(adminPopUp);
         // Création bouton supprimer la collection
         let viderCollection = document.createElement("div");
         viderCollection.classList.add("vidercollectionbouton");
-        viderCollection.textContent = "Supprimer la collection";
+        viderCollection.textContent = "Supprimer la catégorie";
         adminPopUpTopDiv.appendChild(viderCollection);
+
+            // Ajout d'un écouteur d'événement pour supprimer la collection sélectionnée
+            viderCollection.addEventListener("click", () => {
+
+            })
 
         // Création div Zone saisie
         let divZoneSaisie = document.createElement("div");
@@ -80,7 +85,12 @@ document.body.appendChild(adminPopUp);
                         let opt = document.createElement("option")
                         opt.textContent = ajouterCategorie.value;
                         _select.appendChild(opt)
-                        ajouterCategorie.value ="";
+                        let _inputIdSelect = document.getElementById("Catégorie")
+
+                       let _option = document.createElement("option")
+                       _option.textContent = ajouterCategorie.value;
+                       ajouterCategorie.value = "";
+                       _inputIdSelect.appendChild(_option)
                     }
                 })
 
@@ -127,7 +137,8 @@ document.body.appendChild(adminPopUp);
             if(champ.check !==undefined){
                 let checkBox = document.createElement("input");
                 checkBox.type = "checkbox"
-                checkBox.id = champ.nom;
+                //checkBox.id = champ.nom;
+                checkBox.id = `checkBox${champ.nom}`;
                 divCheckBox.appendChild(checkBox);
 
     // Création écouteur événement check box
@@ -169,60 +180,43 @@ topBar.appendChild(divRecherche);
     function creationDivIput () {
 
         // Création Div Inputs
-        divInput = document.createElement("div");
-        divInput.classList.add("divinput");
-        document.body.appendChild(divInput);
+        if (!document.getElementById("divInput")) {
+
+            divInput = document.createElement("div");
+            divInput.id = "divInput"
+                divInput.classList.add("divinput");
+                document.body.appendChild(divInput);
+
+        }
+
     
 
         // Création des Input
         for(let champ of tableauObjectDeChamp) {
-            if(champ.check!==false ) {
-
-                let inputProduit = document.createElement("input");
-                inputProduit.setAttribute("type", champ.type);
-                inputProduit.setAttribute("placeholder", champ.nom);
-                inputProduit.setAttribute("id", champ.nom)
-                divInput.appendChild(inputProduit);
-                
-
-            }
-         
-        }
-
-        /*
-                for(let champ of tableauObjectDeChamp) {
             let inputProduit = null;
-            if(champ.check!==false ) {
 
-
-                if(champ.nom ==="Catégorie"){
+            if(champ.check !== false) {
+                if(champ.nom === "Catégorie"){
                     inputProduit = document.createElement("select");
+             
 
                     for(let opt of choixInput){
 
-                        let option = document.createElement("option")
-                        option.textContent = opt
-                        inputProduit.appendChild(option)
+                        let option = document.createElement("option");
+                        option.textContent = opt;
+                        inputProduit.appendChild(option);
                     }
-
-
                 }else{
                     inputProduit = document.createElement("input");
                     inputProduit.setAttribute("type", champ.type);
                     inputProduit.setAttribute("placeholder", champ.nom);
-               
-                  
-    
-
                 }
-                inputProduit.setAttribute("id", champ.nom)
+                inputProduit.setAttribute("id", champ.nom);
                 divInput.appendChild(inputProduit);
+                
             }
          
         }
-        
-        
-        */
 
         // Création bouton valider
         let validButton = document.createElement("img");
@@ -232,10 +226,10 @@ topBar.appendChild(divRecherche);
         divInput.appendChild(validButton);
         
 
-        // Création écouteur événement bouton valider. Déclenche la Function pour ajouter la base de donnée.
+        // Création écouteur événement bouton valider
         validButton.addEventListener("click", () => {
             if (verifRegex()) {
-                objetConstructeur(tableauObjectDeChamp);
+                objetConstructeur();
             }
         })
     }
@@ -247,10 +241,11 @@ creationDivIput()
 
 
 function toggleCheckBox (input) {
-    //console.log(input)
-   // console.log(tableauObjectDeChamp)
+
     for(let champ in tableauObjectDeChamp){
-    if (tableauObjectDeChamp[champ].nom === input){
+        console.log(tableauObjectDeChamp[champ].nom);
+        console.log(input);
+    if (`checkBox${tableauObjectDeChamp[champ].nom}` === input){
     tableauObjectDeChamp[champ].check = !tableauObjectDeChamp[champ].check
 
 

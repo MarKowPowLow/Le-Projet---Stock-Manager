@@ -170,6 +170,7 @@ topBar.appendChild(divRecherche);
 
         // Création Div Inputs
         divInput = document.createElement("div");
+        divInput.id = "divInput";
         divInput.classList.add("divinput");
         document.body.appendChild(divInput);
     

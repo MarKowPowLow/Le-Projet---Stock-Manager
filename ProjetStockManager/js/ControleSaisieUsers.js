@@ -1,5 +1,3 @@
-import { objetConstructeur } from "./fonctionsContruction.js";
-
 function verifRegex() {
 
     // Input Nom

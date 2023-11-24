@@ -1,7 +1,3 @@
-import { ajouterUnObjetAvecIdSpécifique  } from "./fonctionsCRUDFirebase.js";
-import { tableauObjectDeChamp } from "./variablesGlobales.js";
-import { objetConstructeur } from "./fonctionsContruction.js";
-
 // Creer un objet en prenant les valeurs des champs de text
 const creerCollection = (tableauObjectDeChamp) => {
   let objet = {};

@@ -1,6 +1,3 @@
-import{objetConstructeur, affichagePopUpModifObjet} from "./fonctionsContruction.js"
-
-
 // Création conteneur Top Bar
 let topBar = document.createElement("div");
 topBar.classList.add("topbar");

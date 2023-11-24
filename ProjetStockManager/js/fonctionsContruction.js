@@ -1,6 +1,6 @@
 import { tableauObjectDeChamp } from "./variablesGlobales.js"
 import { creerCollection } from "./fonctionsDeBDD.js"
-import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière,supprimerUnDocument, mettreAJourUnDocument } from "./fonctionsCRUDFirebase.js"
+import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique,supprimerUnDocument, mettreAJourUnDocument } from "./fonctionsCRUDFirebase.js"
 let popUpTab;
 let popUpModifObjet
 let popUpButton

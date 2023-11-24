@@ -1,5 +1,4 @@
 import{objetConstructeur, affichagePopUpModifObjet} from "./fonctionsContruction.js"
-import{creerCollection} from "./fonctionsDeBDD.js"
 import{tableauObjectDeChamp, choixInput} from "./variablesGlobales.js";
 import{verifRegex} from "./ControleSaisieUsers.js"
 import{obtenirTouteLaCollection, mettreAJourUnDocument, supprimerUnDocument} from "./fonctionsCRUDFirebase.js";

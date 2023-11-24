@@ -1,5 +1,4 @@
 import { signIn, createUser, obtenirTouteLaCollection, ajouterUnObjet, supprimerUnDocument } from "./fonctionsCRUDFirebase.js"
-import { deleteUser } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 
 /* Fonction de création de compte utilisateur dans le composant d'authentification et dans la base FireStore */

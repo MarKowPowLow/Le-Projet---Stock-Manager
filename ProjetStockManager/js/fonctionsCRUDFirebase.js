@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, query, where, setDoc }
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, deleteField, query, where, setDoc }
   from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
@@ -20,7 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
+const db = getFirestore(app);
 const auth = getAuth(app);
 
 const createUser = async (email, password) => {
@@ -141,6 +141,19 @@ const supprimerUnDocument = async (dataBase, id) => {
   }
 };
 
+/*
+const supprimerUnField = async (dataBase, id, field) => {
+  const docRef = doc(db, dataBase, id);
+  console.log(docRef);
+
+  try {
+    await deleteField(docRef.field);
+    console.log("Le donnée a bien été supprimé");
+  } catch (error) {
+    console.log(error);
+  }
+};
+*/
 
 const supprimerTousLesDocumentsDeLaCollection = async (collectionName) => {
   const collectionRef = collection(db, collectionName);
@@ -261,6 +274,7 @@ export {
   trouverDocumentsAvecValeur,
   mettreAJourUnDocument,
   supprimerUnDocument,
+  supprimerUnField,
   supprimerTousLesDocumentsDeLaCollection,
   mettreAJourDocumentsAvecValeurParticulière,
   telDocumentExiste,

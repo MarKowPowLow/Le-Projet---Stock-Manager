@@ -5,13 +5,14 @@ import { objetConstructeur } from "./fonctionsContruction.js";
 // Creer un objet en prenant les valeurs des champs de text
 const creerCollection = (tableauObjectDeChamp) => {
   let objet = {};
+  //console.log(objet);
   for (let obj of tableauObjectDeChamp) {
-    //console.log(document.getElementById(obj.nom).value)
-    if(document.getElementById(obj.nom) && document.getElementById(obj.nom).value != "on") {
+    if(document.getElementById(obj.nom) /*&& document.getElementById(obj.nom).value != "on"*/) {
       objet[obj.nom] = document.getElementById(obj.nom).value;
+      //console.log(obj.nom);
     }
   }
-  //console.log(objet)
+  
   return objet;
 };
 

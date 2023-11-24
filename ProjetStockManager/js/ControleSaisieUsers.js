@@ -29,9 +29,9 @@ if (inputRéférence.value == "") {
 
 } else {
 
-    const regexReference = new RegExp("^([A-Z0-9])*$","g");
+    const regexReference = new RegExp("^([A-Z0-9]{4,})*$","g");
     if (regexReference.test(inputRéférence.value) === false) {
-        window.alert("Vous avez entré des caractères incorrect (Lettres Majuscules/Chiffres seulement).")
+        window.alert("Vous avez entré des caractères incorrect (Lettres Majuscules/Chiffres seulement avec au moins 4 caractères).")
         return false}
     }
 

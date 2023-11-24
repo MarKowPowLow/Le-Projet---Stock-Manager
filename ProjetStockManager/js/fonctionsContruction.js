@@ -27,7 +27,7 @@ const constructeurContainerPrincipal = (text) => {
 }
 //######   construction de l'Objet contenant les information saisi.#############
 
-async function objetConstructeur() {
+function objetConstructeur() {
     let obj = creerCollection(tableauObjectDeChamp);
     let conteneurliste = document.getElementById("conteneurliste")
 
@@ -41,7 +41,7 @@ async function objetConstructeur() {
     }*/
     
 
-    let objet = await ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
+    let objet = ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
     //console.log(typeof(obj.id));
     //console.log(obj);
 
@@ -125,8 +125,8 @@ function creerUneLigne(){
 
 // ###### Pop up tableau #########
 
-async function interaction(target){
-    let objet  = await RécupérerObjet (target.children[3].textContent, target.id);  //récupération de l'objet
+function interaction(target){
+    let objet  = RécupérerObjet (target.children[3].textContent, target.id);  //récupération de l'objet
     for(let temp in tableauObjectDeChamp){  //On utilise un boucle pour le contenus du pop-Up
         let parram = (tableauObjectDeChamp[temp].nom);  //Création d'une variable contenant la propriété en cours
         popUpLigne = document.createElement('div'); //Création de la ligne

@@ -1,11 +1,12 @@
-import { tableauObjectDeChamp } from "./test.js"
-import { trouverDocumentsAvecValeur, ajouterUnObjet, mettreAJourDocumentsAvecValeurParticulière } from "./fonctionsCRUDFirebase.js"
+import { tableauObjectDeChamp } from "./variablesGlobales.js"
+import { creerCollection } from "./fonctionsDeBDD.js"
+import { RécupérerObjet, ajouterUnObjetAvecIdSpécifique, mettreAJourDocumentsAvecValeurParticulière,supprimerUnDocument, mettreAJourUnDocument } from "./fonctionsCRUDFirebase.js"
 let popUpTab;
 let popUpModifObjet
 let popUpButton
 let popUpClose
 let popUpInput
-let popUpLine
+let popUpLigne
 let popUpModify
 let popUpPropriete
 let popUpSupp
@@ -24,39 +25,43 @@ const constructeurContainerPrincipal = (text) => {
 
 
 }
-//######   construction de la ligne enfants contenant les information saisi.#############
+//######   construction de l'Objet contenant les information saisi.#############
 
 function objetConstructeur() {
-    let obj = {}
+    let obj = creerCollection(tableauObjectDeChamp);
     let conteneurliste = document.getElementById("conteneurliste")
 
-    //récupération des valeurs des inputs
+    /*//récupération des valeurs des inputs
     for (let ob in tableauObjectDeChamp) {
         let temp = document.getElementById(tableauObjectDeChamp[ob].nom)
         if (temp !== null) {
             obj[temp.id] = temp.value
             temp.value = ""
         }
-    }
-    //création des lignes du tableau et complétion en fonction des valeurs de l'objet 
+    }*/
+    
+
+    let objet = ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
+    //console.log(typeof(obj.id));
+    //console.log(obj);
 
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")
-    parentLigne.id = `ligne${ligneNumber}`
-    parentLigne.addEventListener("click", () => {
-        ligneNumber++
-        affichagePopUpModifObjet()
-        return ligneNumber
+    parentLigne.id = objet.id
+    ligneNumber++
+    parentLigne.addEventListener("click", (e) => {
+        affichagePopUpModifObjet(e)
     })
-
     conteneurliste.appendChild(parentLigne)
+
+
     //création des éléments correspondants aux propriétés et aux valeurs associés des inputs
     for (let temp in obj) {
-
-        let enfantLigne = document.createElement("div")
-        enfantLigne.textContent = obj[temp]
-        parentLigne.appendChild(enfantLigne)
-
+        //console.log(temp)
+        if(temp !== 'id'){
+            let enfantLigne = document.createElement("div")
+            enfantLigne.textContent = obj[temp]
+            parentLigne.appendChild(enfantLigne)}
     }
 }
 
@@ -64,18 +69,27 @@ function objetConstructeur() {
 function ajoutBackgroundFlou() {
 
     flou.className = "flou"
+    flou.addEventListener('click',()=>{
+        closePopUp()
+    })
     document.body.appendChild(flou)
 
 }
 //ajout de la fonction pour afficher le popUp sur le flou
-function affichagePopUpModifObjet() {
+function affichagePopUpModifObjet(e) {
+    let target = e.target;
     ajoutBackgroundFlou()
-    popUpModifObjet = document.createElement('div');
-    popUpModifObjet.id = 'popUpModifObjet'
+
+    if(!document.getElementById("popUpModifObjet")){
+        popUpModifObjet = document.createElement('div');
+        popUpModifObjet.id = 'popUpModifObjet'
+        
+    }
 
 
-    flou.appendChild(popUpModifObjet)
-    interaction()
+
+    document.body.appendChild(popUpModifObjet)
+    interaction (target)
     //trouverDocumentsAvecValeur()
 
 
@@ -100,7 +114,7 @@ function creerUnElement( classe, typeElement, elementParent){
 }
 function creerUneLigne(){
                 // ##### pop up line #####
-                popUpLine = creerUnElement( "popUpLine","div", popUpTab)
+                let popUpLine = creerUnElement( "popUpLine","div", popUpTab)
 
                 //#### pop up propriété ##### 
                 popUpPropriete= creerUnElement("popUpPropriete","div",popUpLine)
@@ -111,37 +125,146 @@ function creerUneLigne(){
 
 // ###### Pop up tableau #########
 
-function interaction(){
-    popUpTab =creerUnElement("popUpTab","div", popUpModifObjet)
+function interaction(target){
+    let objet  = RécupérerObjet (target.children[3].textContent, target.id);  //récupération de l'objet
+    for(let temp in tableauObjectDeChamp){  //On utilise un boucle pour le contenus du pop-Up
+        let parram = (tableauObjectDeChamp[temp].nom);  //Création d'une variable contenant la propriété en cours
+        popUpLigne = document.createElement('div'); //Création de la ligne
+        popUpLigne.classList.add('popUpLigne'); //Attibution de la classe à la ligne
+        popUpPropriete = document.createElement('div'); //Création de champ propriété
+        popUpPropriete.classList.add('popUpPropriete'); //Attibution de la classe au champ propiété
+        popUpPropriete.textContent = parram;    //Insserssion du nom de la propriété dans la 'div' proprité
+        popUpInput = document.createElement('input');   //création de l'input
+        popUpInput.classList.add('popUpInput'); //Attibution de la classe à l'input
+        popUpInput.id = `popUp${tableauObjectDeChamp[temp].nom}` //
+        switch(parram){ //création du placeHolder en fonction de la propiété traité dans la boucle
+            case 'Nom' : popUpInput.placeholder = objet.Nom;
+            break;
+            case 'Référence' : popUpInput.placeholder = objet.Référence
+            break;
+            case 'Quantité' : popUpInput.placeholder = objet.Quantité
+            break;
+            case 'Catégorie' : popUpInput.placeholder = objet.Catégorie
+            break;
+            case 'prix' : popUpInput.placeholder = objet.prix
+            break;
+            case 'date' : popUpInput.placeholder = objet.date
+            break;
+            case 'sousCatégorie' : popUpInput.placeholder = objet.sousCatégorie
+            break;
+            case 'Unité' : popUpInput.placeholder = objet.Unité
+            break;
+        }
+        popUpLigne.appendChild(popUpPropriete)  //inssertion du nom de la propriété dans la ligne
+        popUpLigne.appendChild(popUpInput)  //inssertion de l'input dans la ligne 
+        popUpModifObjet.appendChild(popUpLigne) //inssertion de la ligne dans le pop up
+    }
+    // création du contener des boutons et des différents boutons
+    popUpButton = document.createElement('div')
+    popUpModify = document.createElement('div')
+    popUpSupp = document.createElement('div')
+    popUpClose = document.createElement('div')
+    //Attribution des classes au différentes div
+    popUpButton.classList.add('popUpButton')
+    popUpModify.classList.add('popUpModify')
+    popUpSupp.classList.add('popUpSupp')
+    popUpClose.classList.add('popUpClose')
+    //Ajout d'un text Content au boutons////////////////(A REMPLACER PAR DES ICONES)
+    popUpModify.textContent = "Valid"
+    popUpSupp.textContent = "Supp"
+    popUpClose.textContent = "close"
+    //Création des listeners sur les boutons
+    popUpModify.addEventListener("click",async ()=>{
+        for(let i in tableauObjectDeChamp){
+            let input
+            let parram = `popUp${tableauObjectDeChamp[i].nom}`
+            //console.log(parram)
+            switch(parram){ //création du placeHolder en fonction de la propiété traité dans la boucle
+                case 'popUpNom' :
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Nom = input.value;
+                    target.children[i].textContent = input.value
 
-console.log(popUpTab,popUpModifObjet,"****")
-
-
-
-        // ##### pop up col 1 #####
-
-            creerUneLigne()
-
-        // ##### pop up col 2 #####
-
-            creerUneLigne()
-
-// ###### pop up button ##########
-popUpButton =creerUnElement("popUpButton","div", popUpModifObjet)
-
-    //##### pop up Modify #####
-    popUpModify= creerUnElement("popUpModify","button", popUpButton)
-
-    //##### pop up Supp ######
-    popUpSupp =creerUnElement("popUpSupp", "button",popUpButton)
-
-    //###### pop up Close ######
-    popUpClose =creerUnElement("popUpClose", "button", popUpButton)
+                }
+                break;
+                case 'popUpRéférence' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Référence = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpQuantité' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Quantité = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpCatégorie' :
+                    input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Catégorie = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpPrix' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.prix = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpDate' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.date = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpSousCatégorie' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.sousCatégorie = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+                case 'popUpUnité' : 
+                input = document.getElementById(parram);
+                    if(input.value.length > 0) {
+                    objet.Unité = input.value;
+                    target.children[i].textContent = input.value
+                }
+                break;
+            }
+        }
+        mettreAJourUnDocument(objet.Catégorie, objet.id, objet)
+        closePopUp()
+    })
+    popUpSupp.addEventListener("click",()=>{
+        supprimerUnDocument(objet.Catégorie, objet.id)
+        target.remove()
+        closePopUp()
+    })
+    popUpClose.addEventListener("click",()=>{
+        closePopUp ()
+    })
+    //Implémentation des boutons dans le popUp
+    popUpModifObjet.appendChild(popUpButton)
+    popUpButton.appendChild(popUpModify)
+    popUpButton.appendChild(popUpSupp)
+    popUpButton.appendChild(popUpClose)
+}
+function closePopUp (){
+   while(flou.firstChild){
+    flou.removeChild(flou.firstChild)
+   }
+    flou.remove()
+    popUpModifObjet.remove()
 }
 
 // ###### pop up #########
-
-
 
 
 export { constructeurContainerPrincipal, objetConstructeur, affichagePopUpModifObjet, ajoutBackgroundFlou }

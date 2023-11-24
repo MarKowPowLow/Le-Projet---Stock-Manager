@@ -20,7 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
+const db = getFirestore(app);
 const auth = getAuth(app);
 
 const createUser = async (email, password) => {
@@ -141,7 +141,6 @@ const supprimerUnDocument = async (dataBase, id) => {
   }
 };
 
-
 const supprimerTousLesDocumentsDeLaCollection = async (collectionName) => {
   const collectionRef = collection(db, collectionName);
 
@@ -162,13 +161,16 @@ const supprimerTousLesDocumentsDeLaCollection = async (collectionName) => {
 
 const trouverDocumentsAvecValeur = async (collectionName, fieldName, targetValue) => {
   const collectionRef = collection(db, collectionName);
-
+  
   try {
     const querySnapshot = await getDocs(query(collectionRef, where(fieldName, '==', targetValue)));
 
     querySnapshot.forEach((doc) => {
-      console.log('Document ID: ', doc.id);
-      console.log('Document data: ', doc.data());
+      //console.log('Document ID: ', doc.id);
+      //console.log('Document data: ', doc.data());
+      let collection = doc.data();
+      console.log(collection)
+      return collection;
     });
   } catch (error) {
     console.log("Une erreur s'est produite : ", error);
@@ -234,7 +236,21 @@ const deleteCollection = async (collectionPath) => {
   } catch (error) {
     console.error("Error deleting collection: ", error);
   }
-};
+};/* Récupération d'un objet en fonction de son Id */
+const RécupérerObjet = async (database, objectId) => {
+  let retour;
+  const collection = await obtenirTouteLaCollection(database)
+  //console.log(collection)
+  collection.forEach(element => { 
+    if (element.id == objectId) {
+      retour = element
+      return retour;
+    }
+  });
+  return retour;
+}
+
+
 
 
 export {
@@ -249,5 +265,6 @@ export {
   telDocumentExiste,
   deleteCollection,
   createUser,
-  signIn
+  signIn,
+  RécupérerObjet
 }

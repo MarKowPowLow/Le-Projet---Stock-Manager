@@ -3,8 +3,7 @@
 import { ajouterUnObjet } from "./fonctionsCRUDFirebase.js";
 import { creationEtAjoutUser, // Fonction de création d'utilisateur avec ajout en BDD FireStore.
          authentificationEtRecupération, // Fontcion de récupération d'un compte
-         SupprimerUtilisateur,
-         RécupérerObjet
+        SupprimerUtilisateur
 
 } from "./fonctionsDeGestion.js";
 

@@ -73,6 +73,13 @@ body {
     font-size: 15px;
 }
 
+.divinput select {
+    height: 30px;
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+}
+
 .imagevalider, .imagesupprimer {
 
     height: 50px;

@@ -1,3 +1,5 @@
+import { obtenirTouteLaCollection } from "./fonctionsCRUDFirebase.js";
+
 let tableauObjectDeChamp = [
     {nom:"Nom", type:"text"},
     {nom:"Référence", type:"text"},
@@ -10,7 +12,9 @@ let tableauObjectDeChamp = [
 ];
 //console.log(tableauObjectDeChamp);
 
-let choixInput = ["Fruits", "Légumes", "Fromages", "Yaourts"];
-
+let choixCat = await obtenirTouteLaCollection("Catégorie");
+let choixInput = Object.values(choixCat[0]);
+console.log(choixCat[0]);
+console.log(choixInput);
 
 export {tableauObjectDeChamp ,choixInput}

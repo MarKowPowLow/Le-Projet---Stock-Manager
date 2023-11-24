@@ -243,16 +243,17 @@ creationDivIput()
 function toggleCheckBox (input) {
 
     for(let champ in tableauObjectDeChamp){
-        console.log(tableauObjectDeChamp[champ].nom);
-        console.log(input);
+        //console.log(tableauObjectDeChamp[champ].nom);
+        //console.log(input);
     if (`checkBox${tableauObjectDeChamp[champ].nom}` === input){
     tableauObjectDeChamp[champ].check = !tableauObjectDeChamp[champ].check
 
 
-    suppressionDivInput()
-    suprimerContenaireListe()
-    creationDivIput()
-    creerContenaireListe()
+    suppressionDivInput();
+    suprimerContenaireListe();
+    creationDivIput();
+    creerContenaireListe();
+    boucleImportCollection();
 }}}
 
 
@@ -316,12 +317,14 @@ function importCollection(tableauObjectBDD) {
     }
 }
 // Lance en boucle la fonction importCollection pour chaque Cétégorie.
-for (let id of choixInput) {
-    //console.log(id);
-    let tableauObjectBDD = await obtenirTouteLaCollection(id);
-    importCollection(tableauObjectBDD);
-}
-
+async function boucleImportCollection() {
+    for (let id of choixInput) {
+        //console.log(id);
+        let tableauObjectBDD = await obtenirTouteLaCollection(id);
+        importCollection(tableauObjectBDD);
+    };
+};
+boucleImportCollection();
 
 // Formater un Tableau d'object pour mettre la collection dans l'ordre
 

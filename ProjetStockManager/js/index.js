@@ -210,6 +210,7 @@ topBar.appendChild(divRecherche);
                     inputProduit = document.createElement("input");
                     inputProduit.setAttribute("type", champ.type);
                     inputProduit.setAttribute("placeholder", champ.nom);
+                    inputProduit.setAttribute("step", champ.step);
                 }
                 inputProduit.setAttribute("id", champ.nom);
                 divInput.appendChild(inputProduit);

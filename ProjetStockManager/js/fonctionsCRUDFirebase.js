@@ -20,7 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
+const db = getFirestore(app);
 const auth = getAuth(app);
 
 const createUser = async (email, password) => {
@@ -140,7 +140,6 @@ const supprimerUnDocument = async (dataBase, id) => {
     console.log(error);
   }
 };
-
 
 const supprimerTousLesDocumentsDeLaCollection = async (collectionName) => {
   const collectionRef = collection(db, collectionName);

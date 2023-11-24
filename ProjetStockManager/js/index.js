@@ -312,7 +312,9 @@ function importCollection(tableauObjectBDD) {
             divChamp.appendChild(divConteneur);
             };
         });
-        
+        divChamp.addEventListener("click",(e)=>{
+            affichagePopUpModifObjet(e)
+        })
         conteneurList.appendChild(divChamp);
     }
 }

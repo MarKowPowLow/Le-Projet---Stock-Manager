@@ -316,38 +316,7 @@ function importCollection(tableauObjectBDD) {
             divChamp.appendChild(divConteneur);
             };
         });
-    
-    //console.log(champ);
-    let tableObject = {
-        nom: champ.Nom,
-        ref: champ.Référence,
-        qte: champ.Quantité,
-        cat: champ.Catégorie,
-        prix: champ.Prix,
-        date: champ.Date,
-        sCat: champ.SousCatégorie,
-        unite: champ.Unite,
-        };
-    //console.log(tableObject)
-    let divChamp = document.createElement("div");
-    divChamp.classList.add("divChamp");
-
-    Object.keys(tableObject).forEach(element => {
-       //console.log(champ[element])
-        if (tableObject[element] != undefined && tableObject[element] != "on"){
-        let divConteneur = document.createElement("div");
-        divConteneur.classList.add("divConteneur");
-        divConteneur.setAttribute("id", element);
-        divConteneur.textContent = tableObject[element];
-        divChamp.appendChild(divConteneur);
-
-        };
-    });
-
-    conteneurList.appendChild(divChamp);
-    divChamp.addEventListener("click",(e)=>{
-        affichagePopUpModifObjet(e)
-    })
+        
         conteneurList.appendChild(divChamp);
     }
 }

@@ -1,5 +1,3 @@
-import { obtenirTouteLaCollection } from "./fonctionsCRUDFirebase.js";
-
 let tableauObjectDeChamp = [
     {nom:"Nom", type:"text", check:true},
     {nom:"Référence", type:"text"},

@@ -43,7 +43,7 @@ async function objetConstructeur() {
 
     let objet = await ajouterUnObjetAvecIdSpécifique(obj, obj.Catégorie, obj.Référence);
     //console.log(typeof(obj.id));
-    console.log(obj);
+    //console.log(obj);
 
     let parentLigne = document.createElement("div")
     parentLigne.classList.add("listeobjet")
@@ -57,7 +57,7 @@ async function objetConstructeur() {
 
     //création des éléments correspondants aux propriétés et aux valeurs associés des inputs
     for (let temp in obj) {
-        console.log(temp)
+        //console.log(temp)
         if(temp !== 'id'){
             let enfantLigne = document.createElement("div")
             enfantLigne.textContent = obj[temp]

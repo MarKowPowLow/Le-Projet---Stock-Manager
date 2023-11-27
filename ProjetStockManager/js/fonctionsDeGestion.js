@@ -137,16 +137,38 @@ const SupprimerUtilisateur = async (database, email, id) => {
             // Fenêtre DIALOG/confirm ?
         
        }
-
-
-        
         
     });
+
+}
+
+/* Récupération d'un objet en fonction de son nom */
+
+const RécupérerObjet = async (database, objectId) => {
+
+    let retour;
+
+    const collection = await obtenirTouteLaCollection(database)
+
+    collection.forEach(element => {
+
+        if (element.id == objectId) {
+
+            retour = element
+
+            return retour;
+
+        }
+
+    });
+
+    return retour;
 
 }
 
 export {
     creationEtAjoutUser,
     authentificationEtRecupération,
-    SupprimerUtilisateur
+    SupprimerUtilisateur,
+    RécupérerObjet
 }

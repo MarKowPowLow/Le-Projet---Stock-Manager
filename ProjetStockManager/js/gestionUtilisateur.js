@@ -2,6 +2,7 @@ import{objetConstructeur, affichagePopUpModifObjet} from "./fonctionsContruction
 import { creationEtAjoutUser } from "./fonctionsDeGestion.js"
 
 
+
 // Création conteneur Top Bar
 let topBar = document.createElement("div");
 topBar.classList.add("topbar");
@@ -67,7 +68,6 @@ document.body.appendChild(divInput);
     inputPassword.setAttribute("placeholder", "Mot de passe");
     divInput.appendChild(inputPassword);
 
-    
     let inputEmail = document.createElement("input");
     inputEmail.setAttribute("type", "email");
     inputEmail.setAttribute("placeholder", "Email");
@@ -132,6 +132,7 @@ document.body.appendChild(conteneurList);
         deleteButtonConteneurListe.src ="./img/circle-xmark-regular.svg";
         deleteButtonConteneurListe.className = "imagesupprimer";
         listeobjet.appendChild(deleteButtonConteneurListe);
+
 
         creationEtAjoutUser("users",inputEmail.value,inputPassword.value,selectRole.value)
 

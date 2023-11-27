@@ -12,10 +12,10 @@ let test = {
     catégorie: "Légumes"
 }
 
-let objet = await ajouterUnObjet(test,"test")
+//let objet = await ajouterUnObjet(test,"test")
 
 //console.log(objet.id)
 
-let variable = await RécupérerObjet("test",objet.id)
+//let variable = await RécupérerObjet("test",objet.id)
 
-console.log("Variable : ",variable)
+//console.log("Variable : ",variable)

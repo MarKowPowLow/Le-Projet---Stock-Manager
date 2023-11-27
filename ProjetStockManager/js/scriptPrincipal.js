@@ -7,17 +7,15 @@ import { creationEtAjoutUser, // Fonction de création d'utilisateur avec ajout 
 
 } from "./fonctionsDeGestion.js";
 
-
 let test = {
     nom: "Oignon",
     catégorie: "Légumes"
 }
 
-let objet = await ajouterUnObjet(test,"test")
+//let objet = await ajouterUnObjet(test,"test")
 
 //console.log(objet.id)
 
-let variable = await RécupérerObjet("test",objet.id)
+//let variable = await RécupérerObjet("test",objet.id)
 
-console.log("Variable : ",variable)
-
+//console.log("Variable : ",variable)

@@ -67,7 +67,6 @@ document.body.appendChild(divInput);
     inputPassword.setAttribute("placeholder", "Mot de passe");
     divInput.appendChild(inputPassword);
 
-    
     let inputEmail = document.createElement("input");
     inputEmail.setAttribute("type", "email");
     inputEmail.setAttribute("placeholder", "Email");
